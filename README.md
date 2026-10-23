@@ -72,16 +72,6 @@ Jogo Roblox desde **2017**. O jogo foi uma das partes mais aguardadas do meu dia
 
 </details>
 
-## 🟥 Estrutura do repositório
-
-```
-📦 projeto-individual
- ┣ 📂 docs        → documentação, diário de prompts e imagens
- ┣ 📂 banco       → scripts SQL e modelo lógico
- ┣ 📂 site        → código do website (front-end e API)
- ┗ 📜 README.md
-```
-
 ## 🟥 Como executar
 
 > 🚧 *Em construção. As instruções serão adicionadas conforme o desenvolvimento avançar.*
