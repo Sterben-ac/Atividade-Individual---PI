@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sterben | Início</title>
+
+    <!-- Ícone da aba do navegador -->
+    <link rel="icon" href="img/sterben-logo.svg">
+
+    <!-- Fontes do guia visual: Chakra Petch (títulos) e Inter (texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ===== BARRA DO TOPO ===== -->
+    <header class="topo">
+        <div class="topo-esquerda">
+            <a href="index.html" class="topo-logo">
+                <img src="img/sterben-logo.svg" alt="Sterben">
+            </a>
+            <nav class="menu">
+                <a href="index.html" class="ativo">Início</a>
+                <a href="#como-funciona">Sobre</a>
+                <a href="dashboard.html">Dashboard</a>
+            </nav>
+        </div>
+
+        <!-- Login rápido, igual ao site de 2016 -->
+        <form class="login-rapido" action="#">
+            <div class="login-campos">
+                <input type="text" placeholder="Usuário">
+                <input type="password" placeholder="Senha">
+                <button type="submit" class="botao-login">Entrar</button>
+            </div>
+            <a href="#" class="esqueci">Esqueceu a senha?</a>
+        </form>
+    </header>
+
+    <!-- ===== DESTAQUE PRINCIPAL ===== -->
+    <main class="destaque">
+
+        <!-- Lado esquerdo: logo grande e frase -->
+        <div class="destaque-marca">
+            <img src="img/sterben-nome.svg" alt="Sterben" class="destaque-logo">
+            <p class="destaque-frase">Toda jornada no Roblox merece ser lembrada.</p>
+        </div>
+
+        <!-- Lado direito: cadastro -->
+        <div class="cadastro">
+            <h1 class="cadastro-titulo">Cadastre-se e reviva sua jornada!</h1>
+
+            <form action="#">
+                <input type="text" placeholder="Nome de usuário (não use seu nome real)">
+                <input type="email" placeholder="E-mail">
+                <input type="password" placeholder="Senha (mínimo 8 caracteres)">
+                <input type="password" placeholder="Confirmar senha">
+                <input type="text" placeholder="ID do Roblox (opcional, para função extra)">
+
+                <p class="cadastro-aviso">
+                    Ao se cadastrar, você concorda com os <a href="#">Termos de uso</a>.
+                </p>
+
+                <button type="submit" class="botao-cadastrar">Cadastrar</button>
+            </form>
+        </div>
+
+        <!-- Crédito do jogo que aparece no fundo (troque pelo seu print) -->
+        <p class="credito">
+            Jogo: ROBLOX Point<br>
+            Criador: Sterben <br>
+            Inspiração: StarMarine614
+        </p>
+    </main>
+
+    <!-- ===== COMO FUNCIONA ===== -->
+    <section class="como-funciona" id="como-funciona">
+        <h2>Como funciona</h2>
+
+        <div class="passos">
+            <div class="passo">
+                <span class="passo-numero">1</span>
+                <h3>Crie sua conta</h3>
+                <p>Cadastre-se para possuir acesso ao site
+                     e informe o ID do seu perfil no Roblox.</p>
+            </div>
+            <div class="passo">
+                <span class="passo-numero">2</span>
+                <h3>Importe seus emblemas</h3>
+                <p>O site busca as conquistas públicas do seu perfil.</p>
+            </div>
+            <div class="passo">
+                <span class="passo-numero">3</span>
+                <h3>Veja sua jornada</h3>
+                <p>Acompanhe sua linha do tempo e os indicadores no dashboard.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RODAPÉ ===== -->
+    <footer class="rodape">
+        <p>Sterben · Projeto Individual · São Paulo Tech School · 2026</p>
+        <p class="rodape-aviso">Projeto acadêmico sem vínculo com a Roblox Corporation.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+/* =========================================
+   STERBEN · Página inicial
+   Cores do guia visual
+   ========================================= */
+:root {
+    --fundo: #0F0F12;
+    --cartao: #1C1D22;
+    --borda: #2E3038;
+    --vermelho: #E2231A;
+    --vermelho-brilho: #FF4A3D;
+    --branco: #F4F4F4;
+    --cinza: #A0A4AD;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--fundo);
+    color: var(--branco);
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+a {
+    color: var(--vermelho-brilho);
+    text-decoration: none;
+}
+
+/* ===== BARRA DO TOPO ===== */
+.topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 68px;
+    padding: 0 6%;
+    background-color: rgba(15, 15, 18, 0.88);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+.topo-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.topo-logo img {
+    width: 44px;
+    display: block;
+}
+
+.menu {
+    display: flex;
+    gap: 28px;
+}
+
+.menu a {
+    color: var(--branco);
+    font-size: 17px;
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+}
+
+.menu a:hover,
+.menu a.ativo {
+    border-bottom-color: var(--vermelho);
+}
+
+.login-campos {
+    display: flex;
+    gap: 6px;
+}
+
+.login-campos input {
+    width: 160px;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid var(--borda);
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.botao-login {
+    height: 30px;
+    padding: 0 16px;
+    background-color: var(--vermelho);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.botao-login:hover {
+    background-color: var(--vermelho-brilho);
+}
+
+.esqueci {
+    display: block;
+    margin-top: 3px;
+    font-size: 11px;
+    color: var(--cinza);
+}
+
+/* ===== DESTAQUE PRINCIPAL ===== */
+.destaque {
+    position: relative;
+    min-height: 100vh;
+    padding: 110px 6% 80px;
+    /* camada escura por cima da imagem, para o texto ficar legível */
+    background-image: linear-gradient(rgba(15, 15, 18, 0.25), rgba(15, 15, 18, 0.55)), url('../img/fundo-home.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+}
+
+.destaque-marca {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.destaque-logo {
+    width: 520px;
+    max-width: 100%;
+}
+
+.destaque-frase {
+    margin-top: -6px;
+    padding: 12px 22px;
+    background-color: rgba(15, 15, 18, 0.8);
+    font-size: 24px;
+    font-weight: 500;
+}
+
+/* Caixa de cadastro */
+.cadastro {
+    width: 420px;
+    padding: 28px;
+    background-color: rgba(15, 15, 18, 0.9);
+    border: 1px solid var(--borda);
+    border-top: 4px solid var(--vermelho);
+}
+
+.cadastro-titulo {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.cadastro input {
+    width: 100%;
+    height: 44px;
+    margin-bottom: 10px;
+    padding: 0 14px;
+    background-color: var(--cartao);
+    color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 3px;
+    font-size: 15px;
+}
+
+.cadastro input:focus {
+    outline: none;
+    border-color: var(--vermelho);
+}
+
+.cadastro-aviso {
+    margin: 6px 0 14px;
+    font-size: 12px;
+    color: var(--cinza);
+    text-align: center;
+}
+
+.botao-cadastrar {
+    width: 100%;
+    height: 46px;
+    background-color: var(--vermelho);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.botao-cadastrar:hover {
+    background-color: var(--vermelho-brilho);
+}
+
+.credito {
+    position: absolute;
+    left: 6%;
+    bottom: 24px;
+    font-size: 16px;
+    line-height: 1.4;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ===== COMO FUNCIONA ===== */
+.como-funciona {
+    padding: 80px 6%;
+    text-align: center;
+}
+
+.como-funciona h2 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.passos {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.passo {
+    width: 300px;
+    padding: 30px 24px;
+    background-color: var(--cartao);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+}
+
+.passo-numero {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    margin-bottom: 14px;
+    background-color: var(--vermelho);
+    border-radius: 50%;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.passo h3 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.passo p {
+    color: var(--cinza);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* ===== RODAPÉ ===== */
+.rodape {
+    padding: 28px 6%;
+    border-top: 1px solid var(--borda);
+    text-align: center;
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+.rodape-aviso {
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+/* ===== CELULAR (telas pequenas) ===== */
+@media (max-width: 900px) {
+    .topo {
+        position: static;
+        height: auto;
+        padding: 14px 16px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .login-campos input {
+        width: 110px;
+    }
+
+    .destaque {
+        padding: 40px 16px 90px;
+        flex-direction: column;
+    }
+
+    .cadastro {
+        width: 100%;
+    }
+
+    .passos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .passo {
+        width: 100%;
+    }
+}
