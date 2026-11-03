@@ -93,3 +93,33 @@
 - **O que a IA respondeu (resumo):** A assistente desenvolveu o pacote completo da página inicial (index.html e estilização CSS estruturada de forma simples com Flexbox e variáveis de cores), aplicando o layout inspirado na interface do Roblox de 2016 combinada com a identidade visual do projeto "Sterben". A tela conta com uma barra de navegação superior semitransparente com o emblema da caveira, login rápido, imagem de fundo da montanha-russa com ajuste de legibilidade, o logotipo personalizado com a frase "Toda jornada no Roblox merece ser lembrada", caixa de cadastro lateral com botão vermelho de destaque e créditos do jogo original no rodapé.
 - **O que mudei ou rejeitei, e por quê:** No momento, adicionei na pagina a adição de creditos para o criador original do design da home de 2016 para a página home do Roblox, que se identificava pelo seu nickname de usuário. Criado por StarMarine614.
 - **Link da conversa:** https://claude.ai/share/53f4d742-bae6-4bdb-9a03-a11b370aca46
+
+#010 — 2026-11-01 — Esqueleto da documentação e sugestões de dashboards
+Assistente: Claude (Opus 5.5)
+Camada: Documentação
+Tipo: 📄 Documentação
+Prompt (resumido): “Vou enviar a documentação inicial do meu projeto individual e do em grupo. Quero ter todos os elementos do em grupo no individual (premissas, riscos, objetivos, justificativa, restrições etc.). Primeiro construa o esqueleto com os tópicos, segundo me dê dicas do que melhorar. (...) Vai ser um site com cadastro e login em banco de dados, design inspirado no Roblox, com questionário, minigame simples, história resumida do Roblox e, como parte principal, exibição de inventário e emblemas pelo ID do usuário, com dashboards. Acho melhor dashboards separados, né? Uma grande no ID e pequenas no minigame e questionário. Quero ideias e sugestões.”
+O que a IA respondeu (resumo): Montou um esqueleto com 9 capítulos (Contexto a Organização + Referências), marcando o que já existia e o que faltava. Apontou melhorias: backend inconsistente (Java × Node.js), objetivo geral desatualizado, objetivos específicos incompletos e definição de um MVP. Recomendou dashboards separados (grande no ID, pequenos no quiz e minigame) e sugeriu 7 tabelas para o banco.
+O que usei: As recomendações para as dashboards
+O que rejeitei: A ideia de 7 tabelas, percebi que a ia não estava contextualizada de que o uso do BD seria apenas para login e cadastro, por isso comentei e corrigi ela, em outro chat.
+Link da conversa: https://claude.ai/share/09199609-bd1b-4787-b94e-dbde5c83c412
+
+#011 — 2026-11-01 — Versão em documento + versão comentada
+Assistente: Claude (Opus 5.5)
+Camada: Documentação
+Tipo: 📄 Documentação
+Prompt (literal): “Crie um Claude Doc a partir da sua última resposta. E uma coisa, acho que seria melhor em vez de história do Roblox, a minha história no Roblox, né? O que mais lembro, jogos que me marcaram, o que aprendi (...). Depois de criar o documento, crie um segundo igual ao primeiro, só que com comentários seus entre parênteses, comentando cada parte para mim.”
+O que a IA respondeu (resumo): Criou dois Claude Docs: o esqueleto limpo e um esqueleto comentado, com explicações em itálico sobre cada seção. Trocou “História do Roblox” por “Minha história no Roblox”.
+O que usei: A troca para “Minha história no Roblox” (mudança de como seria 1 segmento do meu site) e a ideia da versão comentada.
+O que mudei ou rejeitei, e por quê: Rejeitei o formato (queria Word, não Claude Doc) e os tópicos com cara de produto comercial, como “Soluções existentes” (tendo em vista que o projeto não possui intenção comercial/venda). Pedi para refazer no prompt seguinte.
+Link da conversa: https://claude.ai/share/09199609-bd1b-4787-b94e-dbde5c83c412
+
+#012 — 2026-11-01 — Esqueleto em Word com capa original e placeholders
+Assistente: Claude (Opus 5.5)
+Camada: Documentação
+Tipo: 📄 Documentação
+Prompt (resumido): “Refaça, eu queria o esqueleto pronto em Word, e adaptar os tópicos, porque diferente do trabalho em grupo isso não é um projeto econômico para vender a um cliente hipotético. ‘Soluções existentes’ faz parecer um produto. Os emojis de ‘new’ deixa só no comentado. O início do Word deve ser igual ao meu documento individual (capa, nome, RA etc.) e nos tópicos coloque um placeholder tipo ‘insira texto aqui’.”
+O que a IA respondeu (resumo): Gerou dois .docx a partir do arquivo original, mantendo capa, nome, RA, fontes e margens. Um é limpo, para entregar; o outro é comentado, com notas em azul e 🆕. Removeu Público-alvo, Soluções existentes e Proposta de valor, criou “3.3 Aprendizados esperados” e adicionou placeholders amarelos “[Insira o texto aqui: …]” e tabelas prontas (requisitos, riscos, cronograma).
+O que usei: O esqueleto do texto, para automatizar a parte de construir, como o sumário, tópicos padrão da documentação de 1 projeto, por ser algo simples, porém manual e com um tempo significativo para fazer.
+O que mudei ou rejeitei, e por quê: Adaptei os tópicos porque meu projeto é pessoal e acadêmico, não um produto para vender. Por isso tirei “soluções existentes” e “proposta de valor” e coloquei “aprendizados esperados”, já que o valor aqui é o que eu aprendo. Os placeholders marcam o que ainda falta eu escrever.
+Link da conversa: https://claude.ai/share/09199609-bd1b-4787-b94e-dbde5c83c412
