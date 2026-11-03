@@ -1,0 +1,434 @@
+/* =========================================
+   STERBEN · Tela inicial (depois do login)
+   Inspirada no site do Roblox de 2016
+   ========================================= */
+
+:root {
+    /* navbar (mesma do Sterben Home) */
+    --nav-fundo: rgba(15, 15, 18, 0.95);
+    --vermelho: #E2231A;
+    --vermelho-brilho: #FF4A3D;
+    --branco: #F4F4F4;
+
+    /* conteúdo (estilo 2016: fundo cinza e caixas brancas) */
+    --fundo: #E3E3E3;
+    --caixa: #FFFFFF;
+    --texto: #191919;
+    --texto-menu: #393B3D;
+    --cinza: #757575;
+    --linha: #D6D6D6;
+
+    /* medidas usadas em mais de um lugar */
+    --altura-nav: 68px;
+    --largura-menu: 200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--fundo);
+    color: var(--texto);
+    font-family: 'Source Sans 3', Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--altura-nav);
+    padding: 0 24px;
+    background-color: var(--nav-fundo);
+    font-family: 'Inter', Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+.nav-esquerda,
+.nav-direita {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.logo {
+    width: 44px;
+    display: block;
+}
+
+.link {
+    color: var(--branco);
+    font-size: 16px;
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+}
+
+.link:hover,
+.link.ativo {
+    border-bottom-color: var(--vermelho);
+}
+
+.nav-direita {
+    gap: 14px;
+}
+
+.btn-2017 {
+    padding: 7px 14px;
+    background-color: transparent;
+    color: var(--branco);
+    border: 1px solid #4A4D55;
+    border-radius: 3px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn-2017:hover {
+    border-color: var(--vermelho);
+}
+
+.avatar-nav {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--vermelho);
+}
+
+.nome-nav {
+    color: var(--branco);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.sair {
+    color: #A0A4AD;
+    font-size: 14px;
+}
+
+.sair:hover {
+    color: var(--vermelho-brilho);
+}
+
+/* ===== MENU LATERAL ===== */
+.menu-lateral {
+    position: fixed;
+    top: var(--altura-nav);
+    left: 0;
+    width: var(--largura-menu);
+    height: calc(100vh - var(--altura-nav));
+    padding-top: 16px;
+    background-color: var(--caixa);
+    border-right: 1px solid var(--linha);
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    color: var(--texto-menu);
+    font-size: 17px;
+    border-left: 4px solid transparent;
+}
+
+.item:hover {
+    background-color: #F2F2F2;
+}
+
+.item.selecionado {
+    border-left-color: var(--vermelho);
+    background-color: #F2F2F2;
+    font-weight: 600;
+}
+
+.icone {
+    width: 22px;
+    height: 22px;
+}
+
+/* ===== ÁREA CENTRAL ===== */
+.container {
+    margin-left: var(--largura-menu);
+    padding: calc(var(--altura-nav) + 24px) 24px 40px;
+    max-width: 1280px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.principal {
+    flex: 1;
+    min-width: 0; /* deixa o conteúdo encolher sem estourar a tela */
+}
+
+/* topo com foto e "Olá" */
+.topo-perfil {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 20px;
+}
+
+.foto-perfil {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--caixa);
+    border: 4px solid var(--caixa);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.saudacao {
+    font-size: 40px;
+    font-weight: 400;
+}
+
+/* título de cada seção + botão "Ver todos" */
+.titulo-secao {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 24px 0 8px;
+}
+
+.titulo-secao h2 {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.btn {
+    padding: 4px 14px;
+    background-color: var(--vermelho);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 3px;
+}
+
+.btn:hover {
+    background-color: var(--vermelho-brilho);
+}
+
+/* caixa branca usada em amigos e emblemas */
+.box {
+    background-color: var(--caixa);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== AMIGOS ===== */
+.amigos {
+    padding: 16px 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    overflow-x: auto;
+}
+
+.amigo {
+    width: 90px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.amigo img {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #F2F2F2;
+    border: 1px solid var(--linha);
+}
+
+.amigo p {
+    margin-top: 6px;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===== CARDS DE JOGOS ===== */
+.lista-jogos {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+
+.card {
+    background-color: var(--caixa);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    padding-bottom: 10px;
+}
+
+.card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.nome-jogo {
+    padding: 6px 8px 0;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.jogando {
+    padding: 2px 8px 0;
+    font-size: 12px;
+    color: var(--cinza);
+}
+
+/* barrinha de avaliação embaixo do card */
+.barra {
+    height: 5px;
+    margin: 8px 8px 0;
+    background-color: var(--linha);
+}
+
+.barra-cheia {
+    height: 100%;
+    background-color: var(--cinza);
+}
+
+/* ===== LADO DIREITO ===== */
+.lado-direito {
+    width: 170px;
+    flex-shrink: 0;
+}
+
+.banner {
+    background-color: var(--caixa);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    padding-bottom: 12px;
+    text-align: center;
+}
+
+.banner img {
+    width: 100%;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.btn-jogar {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 16px;
+}
+
+.legenda {
+    margin: 4px 0 16px;
+    font-size: 11px;
+    color: var(--cinza);
+}
+
+.emblemas {
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-items: center;
+}
+
+.emblemas img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ===== RODAPÉ ===== */
+.rodape {
+    margin-left: var(--largura-menu);
+    padding: 24px;
+    border-top: 1px solid var(--linha);
+    text-align: center;
+    color: var(--cinza);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ===== TELAS MENORES ===== */
+@media (max-width: 1200px) {
+    .lista-jogos {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .navbar {
+        position: static;
+        height: auto;
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nav-esquerda {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .menu-lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 0;
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .item {
+        border-left: none;
+        border-bottom: 4px solid transparent;
+        white-space: nowrap;
+    }
+
+    .item.selecionado {
+        border-bottom-color: var(--vermelho);
+    }
+
+    .container {
+        margin-left: 0;
+        padding: 20px 16px;
+        flex-direction: column;
+        align-items: stretch; /* as colunas ocupam a largura da tela */
+    }
+
+    .lado-direito {
+        width: 100%;
+    }
+
+    .banner img {
+        max-height: 260px;
+        object-fit: cover;
+    }
+
+    .lista-jogos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rodape {
+        margin-left: 0;
+    }
+}
