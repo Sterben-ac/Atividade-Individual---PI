@@ -123,3 +123,14 @@ O que a IA respondeu (resumo): Gerou dois .docx a partir do arquivo original, ma
 O que usei: O esqueleto do texto, para automatizar a parte de construir, como o sumário, tópicos padrão da documentação de 1 projeto, por ser algo simples, porém manual e com um tempo significativo para fazer.
 O que mudei ou rejeitei, e por quê: Adaptei os tópicos porque meu projeto é pessoal e acadêmico, não um produto para vender. Por isso tirei “soluções existentes” e “proposta de valor” e coloquei “aprendizados esperados”, já que o valor aqui é o que eu aprendo. Os placeholders marcam o que ainda falta eu escrever.
 Link da conversa: https://claude.ai/share/09199609-bd1b-4787-b94e-dbde5c83c412
+
+### #013 — 2026-11-01 — CSS da tela inicial (logado) inspirada no Roblox 2016
+- **Assistente:** Claude (Opus 5.5)
+- **Camada:** Front-end (HTML/CSS)
+- **Tipo:** 🟡 Trecho de código
+- **Prompt (resumido):** "Elabore o CSS para o meu HTML. Vou enviar o arquivo, a imagem de referência da tela inicial do Roblox de 2016 (minha inspiração) e um esboço meu; na dúvida, aproxime-se de 2016. Corrija o HTML ou faça as alterações que achar necessárias, mas me diga tudo o que mudar. No CSS fique livre. Mantenha a navbar do Sterben Home e use as imagens a partir do quarto anexo como placeholder."
+- **Anexo:** HTML da tela inicial, print do Roblox 2016, esboço próprio e imagens de placeholder.
+- **O que a IA respondeu (resumo):** Criou o CSS no visual de 2016 (fundo cinza claro, caixas brancas com sombra, menu lateral, amigos em círculos, cards de jogos com barra de avaliação), trocando o azul da época pelo vermelho do Sterben e mantendo a navbar escura. No HTML, corrigiu erros (`crad` → `card`, `style` inline no h1, `<br>` e `<center>` removidos, `alt` faltando), trocou divs por tags semânticas (`header`, `aside`, `main`, `footer`), adicionou fontes, ícone e imagens de exemplo, e não renomeou nenhuma classe. Deixou cores e medidas em variáveis no `:root`, já preparando o "modo 2017".
+- **O que usei:** Adotarei como base, pois pretendo fazer alterações, remoções, em como achar necessário ao longo do projeto.
+- **Commit:** `Será realizado ainda no github`
+- **Link da conversa:** https://claude.ai/share/53f4d742-bae6-4bdb-9a03-a11b370aca46
