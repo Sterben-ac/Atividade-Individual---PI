@@ -132,5 +132,5 @@ Link da conversa: https://claude.ai/share/09199609-bd1b-4787-b94e-dbde5c83c412
 - **Anexo:** HTML da tela inicial, print do Roblox 2016, esboço próprio e imagens de placeholder.
 - **O que a IA respondeu (resumo):** Criou o CSS no visual de 2016 (fundo cinza claro, caixas brancas com sombra, menu lateral, amigos em círculos, cards de jogos com barra de avaliação), trocando o azul da época pelo vermelho do Sterben e mantendo a navbar escura. No HTML, corrigiu erros (`crad` → `card`, `style` inline no h1, `<br>` e `<center>` removidos, `alt` faltando), trocou divs por tags semânticas (`header`, `aside`, `main`, `footer`), adicionou fontes, ícone e imagens de exemplo, e não renomeou nenhuma classe. Deixou cores e medidas em variáveis no `:root`, já preparando o "modo 2017".
 - **O que usei:** Adotarei como base, pois pretendo fazer alterações, remoções, em como achar necessário ao longo do projeto.
-- **Commit:** `Será realizado ainda no github`
+- **Commit:** `cb39179`
 - **Link da conversa:** https://claude.ai/share/53f4d742-bae6-4bdb-9a03-a11b370aca46
