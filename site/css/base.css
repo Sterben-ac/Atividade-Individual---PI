@@ -1,26 +1,61 @@
 /* =========================================
-   STERBEN · Tela inicial (depois do login)
-   Inspirada no site do Roblox de 2016
+   STERBEN · Base das páginas depois do login
+   (navbar, menu lateral, cards e rodapé)
+   Layout inspirado no site do Roblox de 2016,
+   cores do guia visual Sterben (tema escuro)
    ========================================= */
 
 :root {
     /* navbar (mesma do Sterben Home) */
     --nav-fundo: rgba(15, 15, 18, 0.95);
-    --vermelho: #E2231A;
-    --vermelho-brilho: #FF4A3D;
+    --destaque: #E2231A;        /* botões, item ativo */
+    --destaque-brilho: #FF4A3D; /* hover dos botões */
     --branco: #F4F4F4;
 
-    /* conteúdo (estilo 2016: fundo cinza e caixas brancas) */
-    --fundo: #E3E3E3;
-    --caixa: #FFFFFF;
-    --texto: #191919;
-    --texto-menu: #393B3D;
-    --cinza: #757575;
-    --linha: #D6D6D6;
+    /* conteúdo (tema escuro do Sterben) */
+    --fundo: #0F0F12;
+    --caixa: #1C1D22;
+    --caixa-hover: #24252B;
+    --texto: #F4F4F4;
+    --texto-menu: #D4D6DB;
+    --cinza: #A0A4AD;
+    --linha: #2E3038;
 
     /* medidas usadas em mais de um lugar */
     --altura-nav: 68px;
     --largura-menu: 200px;
+}
+
+/* ===== MODO 2017 =====
+   O JavaScript coloca a classe "modo-2017" no <body>.
+   Aqui só trocamos as variáveis: o resto do CSS se ajusta sozinho. */
+body.modo-2017 {
+    --nav-fundo: #00A2FF;
+    --destaque: #00A2FF;
+    --destaque-brilho: #32B5FF;
+
+    --fundo: #E3E3E3;
+    --caixa: #FFFFFF;
+    --caixa-hover: #F2F2F2;
+    --texto: #191919;
+    --texto-menu: #393B3D;
+    --cinza: #757575;
+    --linha: #D6D6D6;
+}
+
+/* na navbar azul, o sublinhado e a borda do avatar ficam brancos */
+body.modo-2017 .link.ativo,
+body.modo-2017 .link:hover {
+    border-bottom-color: var(--branco);
+}
+
+body.modo-2017 .avatar-nav,
+body.modo-2017 .btn-2017 {
+    border-color: var(--branco);
+}
+
+body.modo-2017 .sair {
+    color: var(--branco);
 }
 
 * {
@@ -76,7 +111,7 @@ a {
 
 .link:hover,
 .link.ativo {
-    border-bottom-color: var(--vermelho);
+    border-bottom-color: var(--destaque);
 }
 
 .nav-direita {
@@ -95,7 +130,7 @@ a {
 }
 
 .btn-2017:hover {
-    border-color: var(--vermelho);
+    border-color: var(--destaque);
 }
 
 .avatar-nav {
@@ -103,7 +138,7 @@ a {
     height: 34px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--vermelho);
+    border: 2px solid var(--destaque);
 }
 
 .nome-nav {
@@ -118,7 +153,7 @@ a {
 }
 
 .sair:hover {
-    color: var(--vermelho-brilho);
+    color: var(--destaque-brilho);
 }
 
 /* ===== MENU LATERAL ===== */
@@ -144,18 +179,28 @@ a {
 }
 
 .item:hover {
-    background-color: #F2F2F2;
+    background-color: var(--caixa-hover);
 }
 
 .item.selecionado {
-    border-left-color: var(--vermelho);
-    background-color: #F2F2F2;
+    border-left-color: var(--destaque);
+    background-color: var(--caixa-hover);
     font-weight: 600;
 }
 
 .icone {
     width: 22px;
     height: 22px;
+}
+
+/* os ícones .svg são cinza-escuro: no tema escuro invertemos a cor
+   para ficarem claros; no Modo 2017 voltam ao normal */
+.icone {
+    filter: invert(1);
+}
+
+body.modo-2017 .icone {
+    filter: none;
 }
 
 /* ===== ÁREA CENTRAL ===== */
@@ -187,8 +232,7 @@ a {
     border-radius: 50%;
     object-fit: cover;
     background-color: var(--caixa);
-    border: 4px solid var(--caixa);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    border: 4px solid var(--linha);
 }
 
 .saudacao {
@@ -211,7 +255,7 @@ a {
 
 .btn {
     padding: 4px 14px;
-    background-color: var(--vermelho);
+    background-color: var(--destaque);
     color: white;
     font-size: 14px;
     font-weight: 600;
@@ -219,13 +263,15 @@ a {
 }
 
 .btn:hover {
-    background-color: var(--vermelho-brilho);
+    background-color: var(--destaque-brilho);
 }
 
-/* caixa branca usada em amigos e emblemas */
+/* caixa usada em amigos e emblemas
+   (no fundo escuro sombra quase não aparece, então usamos borda) */
 .box {
     background-color: var(--caixa);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--linha);
+    border-radius: 4px;
 }
 
 /* ===== AMIGOS ===== */
@@ -248,7 +294,7 @@ a {
     height: 84px;
     border-radius: 50%;
     object-fit: cover;
-    background-color: #F2F2F2;
+    background-color: var(--caixa-hover);
     border: 1px solid var(--linha);
 }
 
@@ -269,12 +315,14 @@ a {
 
 .card {
     background-color: var(--caixa);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--linha);
+    border-radius: 4px;
+    overflow: hidden; /* a imagem respeita o canto arredondado */
     padding-bottom: 10px;
 }
 
 .card:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-color: var(--cinza);
 }
 
 .card img {
@@ -318,7 +366,9 @@ a {
 
 .banner {
     background-color: var(--caixa);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--linha);
+    border-radius: 4px;
+    overflow: hidden;
     padding-bottom: 12px;
     text-align: center;
 }
@@ -405,7 +455,7 @@ a {
     }
 
     .item.selecionado {
-        border-bottom-color: var(--vermelho);
+        border-bottom-color: var(--destaque);
     }
 
     .container {
@@ -432,3 +482,4 @@ a {
         margin-left: 0;
     }
 }
+
