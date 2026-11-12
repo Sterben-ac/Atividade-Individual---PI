@@ -68,6 +68,7 @@ body {
     background-color: var(--fundo);
     color: var(--texto);
     font-family: 'Source Sans 3', Arial, sans-serif;
+    padding-left: var(--largura-menu); /* espaço do menu lateral fixo */
 }
 
 a {
@@ -204,10 +205,11 @@ body.modo-2017 .icone {
 }
 
 /* ===== ÁREA CENTRAL ===== */
+/* conteúdo centralizado no espaço que sobra ao lado do menu */
 .container {
-    margin-left: var(--largura-menu);
+    margin: 0 auto;
     padding: calc(var(--altura-nav) + 24px) 24px 40px;
-    max-width: 1280px;
+    max-width: 1400px;
     display: flex;
     gap: 24px;
     align-items: flex-start;
@@ -360,7 +362,7 @@ body.modo-2017 .icone {
 
 /* ===== LADO DIREITO ===== */
 .lado-direito {
-    width: 170px;
+    width: 220px;
     flex-shrink: 0;
 }
 
@@ -408,7 +410,6 @@ body.modo-2017 .icone {
 
 /* ===== RODAPÉ ===== */
 .rodape {
-    margin-left: var(--largura-menu);
     padding: 24px;
     border-top: 1px solid var(--linha);
     text-align: center;
@@ -458,8 +459,11 @@ body.modo-2017 .icone {
         border-bottom-color: var(--destaque);
     }
 
+    body {
+        padding-left: 0; /* no celular o menu fica em cima, não do lado */
+    }
+
     .container {
-        margin-left: 0;
         padding: 20px 16px;
         flex-direction: column;
         align-items: stretch; /* as colunas ocupam a largura da tela */
@@ -476,10 +480,6 @@ body.modo-2017 .icone {
 
     .lista-jogos {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .rodape {
-        margin-left: 0;
     }
 }
 
