@@ -25,13 +25,14 @@
             </nav>
         </div>
 
-        <form class="login-rapido" action="inicio.html">
+        <form class="login-rapido" id="form_login" novalidate onsubmit="return false">
             <div class="login-campos">
-                <input type="text" placeholder="Usuário">
-                <input type="password" placeholder="Senha">
-                <button type="submit" class="botao-login">Entrar</button>
+                <input type="text" id="input_login_usuario" placeholder="Usuário" autocomplete="username">
+                <input type="password" id="input_login_senha" placeholder="Senha" autocomplete="current-password">
+                <button type="button" class="botao-login" onclick="logar()">Entrar</button>
             </div>
-            <a href="#" class="esqueci">Esqueceu a senha?</a>
+            <p class="login-mensagem" id="div_login_mensagem"></p>
+            <a href="#" class="esqueci" onclick="esqueciSenha(); return false">Esqueceu a senha?</a>
         </form>
     </header>
 
@@ -45,18 +46,27 @@
         <div class="cadastro">
             <h1 class="cadastro-titulo">Cadastre-se e reviva sua jornada!</h1>
 
-            <form action="#">
-                <input type="text" placeholder="Nome de usuário (não use seu nome real)">
-                <input type="email" placeholder="E-mail">
-                <input type="password" placeholder="Senha (mínimo 8 caracteres)">
-                <input type="password" placeholder="Confirmar senha">
-                <input type="text" placeholder="ID do Roblox (opcional, para função extra)">
+            <form id="form_cadastro" novalidate onsubmit="return false">
+                <input type="text" id="input_usuario" placeholder="Nome de usuário (não use seu nome real)" autocomplete="username">
+                <p class="erro-campo" id="div_erro_usuario"></p>
+
+                <input type="email" id="input_email" placeholder="E-mail" autocomplete="email">
+                <p class="erro-campo" id="div_erro_email"></p>
+
+                <input type="password" id="input_senha" placeholder="Senha (mínimo 8 caracteres, com número)" autocomplete="new-password">
+                <p class="erro-campo" id="div_erro_senha"></p>
+
+                <input type="password" id="input_confirmar" placeholder="Confirmar senha" autocomplete="new-password">
+                <p class="erro-campo" id="div_erro_confirmar"></p>
+
+                <input type="text" id="input_roblox" placeholder="ID do Roblox (opcional)" inputmode="numeric">
+                <p class="erro-campo" id="div_erro_roblox"></p>
 
                 <p class="cadastro-aviso">
                     Ao se cadastrar, você concorda com os <a href="#">Termos de uso</a>.
                 </p>
 
-                <button type="submit" class="botao-cadastrar">Cadastrar</button>
+                <button type="button" class="botao-cadastrar" onclick="cadastrar()">Cadastrar</button>
             </form>
         </div>
 
@@ -95,5 +105,138 @@
         <p class="rodape-aviso">Projeto acadêmico sem vínculo com a Roblox Corporation.</p>
     </footer>
 
+    <script>
+
+        if (localStorage.getItem(`sterben_sessao`) != null) {
+            window.location.href = `inicio.html`;
+        }
+
+        function lerUsuarios() {
+            let salvos = localStorage.getItem(`sterben_usuarios`);
+            if (salvos == null) {
+                return [];
+            }
+            return JSON.parse(salvos);
+        }
+
+        function abrirSessao(usuario) {
+            let sessao = { usuario: usuario.usuario, robloxId: usuario.robloxId, foto: null };
+            localStorage.setItem(`sterben_sessao`, JSON.stringify(sessao));
+            window.location.href = `inicio.html`;
+        }
+
+        function mostrarErro(campo, mensagem) {
+            document.getElementById(`div_erro_${campo}`).innerHTML = mensagem;
+            if (mensagem == ``) {
+                document.getElementById(`input_${campo}`).classList.remove(`invalido`);
+            } else {
+                document.getElementById(`input_${campo}`).classList.add(`invalido`);
+            }
+        }
+
+        function cadastrar() {
+            let usuarioVar = input_usuario.value.trim();
+            let emailVar = input_email.value.trim();
+            let senhaVar = input_senha.value;
+            let confirmarVar = input_confirmar.value;
+            let robloxIdVar = input_roblox.value.trim();
+
+            let usuarios = lerUsuarios();
+            let valido = true;
+            let erro = ``;
+
+            if (usuarioVar.length < 3 || usuarioVar.length > 20) {
+                erro = `Use de 3 a 20 caracteres.`;
+            } else if (usuarioVar.indexOf(` `) != -1) {
+                erro = `Não use espaço no nome de usuário.`;
+            } else {
+                for (let i = 0; i < usuarios.length; i++) {
+                    if (usuarios[i].usuario.toLowerCase() == usuarioVar.toLowerCase()) {
+                        erro = `Esse nome já está em uso.`;
+                    }
+                }
+            }
+            mostrarErro(`usuario`, erro);
+            if (erro != ``) { valido = false; }
+
+            erro = ``;
+            let posicaoArroba = emailVar.indexOf(`@`);
+            let posicaoPonto = emailVar.lastIndexOf(`.`);
+            if (posicaoArroba < 1 || posicaoPonto < posicaoArroba + 2 || posicaoPonto == emailVar.length - 1) {
+                erro = `Digite um e-mail válido (ex.: nome@email.com).`;
+            } else {
+                for (let i = 0; i < usuarios.length; i++) {
+                    if (usuarios[i].email == emailVar) {
+                        erro = `Esse e-mail já foi cadastrado.`;
+                    }
+                }
+            }
+            mostrarErro(`email`, erro);
+            if (erro != ``) { valido = false; }
+
+            erro = ``;
+            let temNumero = false;
+            for (let i = 0; i < senhaVar.length; i++) {
+                if (senhaVar[i] >= `0` && senhaVar[i] <= `9`) {
+                    temNumero = true;
+                }
+            }
+            if (senhaVar.length < 8) {
+                erro = `A senha precisa ter pelo menos 8 caracteres.`;
+            } else if (temNumero == false) {
+                erro = `Coloque pelo menos um número na senha.`;
+            }
+            mostrarErro(`senha`, erro);
+            if (erro != ``) { valido = false; }
+
+            erro = ``;
+            if (confirmarVar != senhaVar) {
+                erro = `As senhas não são iguais.`;
+            }
+            mostrarErro(`confirmar`, erro);
+            if (erro != ``) { valido = false; }
+
+            erro = ``;
+            if (robloxIdVar != `` && isNaN(robloxIdVar)) {
+                erro = `O ID do Roblox tem só números.`;
+            }
+            mostrarErro(`roblox`, erro);
+            if (erro != ``) { valido = false; }
+
+            if (valido == false) {
+                return;
+            }
+
+            let novoUsuario = { usuario: usuarioVar, email: emailVar, senha: senhaVar, robloxId: robloxIdVar };
+            usuarios.push(novoUsuario);
+            localStorage.setItem(`sterben_usuarios`, JSON.stringify(usuarios));
+            abrirSessao(novoUsuario);
+        }
+
+        function logar() {
+            let usuarioVar = input_login_usuario.value.trim();
+            let senhaVar = input_login_senha.value;
+            let mensagem = div_login_mensagem;
+
+            if (usuarioVar == `` || senhaVar == ``) {
+                mensagem.innerHTML = `Preencha usuário e senha.`;
+                return;
+            }
+
+            let usuarios = lerUsuarios();
+            for (let i = 0; i < usuarios.length; i++) {
+                let u = usuarios[i];
+                if ((u.usuario.toLowerCase() == usuarioVar.toLowerCase() || u.email == usuarioVar) && u.senha == senhaVar) {
+                    abrirSessao(u);
+                    return;
+                }
+            }
+            mensagem.innerHTML = `Usuário ou senha incorretos.`;
+        }
+
+        function esqueciSenha() {
+            div_login_mensagem.innerHTML = `Por enquanto os dados ficam só neste navegador. Crie uma conta nova.`;
+        }
+    </script>
 </body>
 </html>

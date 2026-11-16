@@ -76,9 +76,22 @@ a {
     width: 160px;
     height: 30px;
     padding: 0 10px;
+    background-color: var(--cartao);
+    color: var(--branco);
     border: 1px solid var(--borda);
     border-radius: 3px;
     font-size: 13px;
+}
+
+.login-campos input:focus {
+    outline: none;
+    border-color: var(--vermelho);
+}
+
+.login-mensagem {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--vermelho-brilho);
 }
 
 .botao-login {
@@ -165,6 +178,21 @@ a {
 .cadastro input:focus {
     outline: none;
     border-color: var(--vermelho);
+}
+
+.cadastro input.invalido {
+    border-color: var(--vermelho-brilho);
+}
+
+.cadastro input {
+    margin-bottom: 2px;
+}
+
+.erro-campo {
+    min-height: 16px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: var(--vermelho-brilho);
 }
 
 .cadastro-aviso {
