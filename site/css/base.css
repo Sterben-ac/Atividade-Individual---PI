@@ -1,18 +1,9 @@
-/* =========================================
-   STERBEN · Base das páginas depois do login
-   (navbar, menu lateral, cards e rodapé)
-   Layout inspirado no site do Roblox de 2016,
-   cores do guia visual Sterben (tema escuro)
-   ========================================= */
-
 :root {
-    /* navbar (mesma do Sterben Home) */
     --nav-fundo: rgba(15, 15, 18, 0.95);
-    --destaque: #E2231A;        /* botões, item ativo */
-    --destaque-brilho: #FF4A3D; /* hover dos botões */
+    --destaque: #E2231A;
+    --destaque-brilho: #FF4A3D;
     --branco: #F4F4F4;
 
-    /* conteúdo (tema escuro do Sterben) */
     --fundo: #0F0F12;
     --caixa: #1C1D22;
     --caixa-hover: #24252B;
@@ -21,14 +12,10 @@
     --cinza: #A0A4AD;
     --linha: #2E3038;
 
-    /* medidas usadas em mais de um lugar */
     --altura-nav: 68px;
     --largura-menu: 200px;
 }
 
-/* ===== MODO 2017 =====
-   O JavaScript coloca a classe "modo-2017" no <body>.
-   Aqui só trocamos as variáveis: o resto do CSS se ajusta sozinho. */
 body.modo-2017 {
     --nav-fundo: #00A2FF;
     --destaque: #00A2FF;
@@ -43,7 +30,6 @@ body.modo-2017 {
     --linha: #D6D6D6;
 }
 
-/* na navbar azul, o sublinhado e a borda do avatar ficam brancos */
 body.modo-2017 .link.ativo,
 body.modo-2017 .link:hover {
     border-bottom-color: var(--branco);
@@ -68,14 +54,13 @@ body {
     background-color: var(--fundo);
     color: var(--texto);
     font-family: 'Source Sans 3', Arial, sans-serif;
-    padding-left: var(--largura-menu); /* espaço do menu lateral fixo */
+    padding-left: var(--largura-menu);
 }
 
 a {
     text-decoration: none;
 }
 
-/* ===== NAVBAR ===== */
 .navbar {
     position: fixed;
     top: 0;
@@ -157,7 +142,6 @@ a {
     color: var(--destaque-brilho);
 }
 
-/* ===== MENU LATERAL ===== */
 .menu-lateral {
     position: fixed;
     top: var(--altura-nav);
@@ -194,8 +178,6 @@ a {
     height: 22px;
 }
 
-/* os ícones .svg são cinza-escuro: no tema escuro invertemos a cor
-   para ficarem claros; no Modo 2017 voltam ao normal */
 .icone {
     filter: invert(1);
 }
@@ -204,8 +186,6 @@ body.modo-2017 .icone {
     filter: none;
 }
 
-/* ===== ÁREA CENTRAL ===== */
-/* conteúdo centralizado no espaço que sobra ao lado do menu */
 .container {
     margin: 0 auto;
     padding: calc(var(--altura-nav) + 24px) 24px 40px;
@@ -217,10 +197,9 @@ body.modo-2017 .icone {
 
 .principal {
     flex: 1;
-    min-width: 0; /* deixa o conteúdo encolher sem estourar a tela */
+    min-width: 0;
 }
 
-/* topo com foto e "Olá" */
 .topo-perfil {
     display: flex;
     align-items: center;
@@ -242,7 +221,6 @@ body.modo-2017 .icone {
     font-weight: 400;
 }
 
-/* título de cada seção + botão "Ver todos" */
 .titulo-secao {
     display: flex;
     justify-content: space-between;
@@ -268,15 +246,12 @@ body.modo-2017 .icone {
     background-color: var(--destaque-brilho);
 }
 
-/* caixa usada em amigos e emblemas
-   (no fundo escuro sombra quase não aparece, então usamos borda) */
 .box {
     background-color: var(--caixa);
     border: 1px solid var(--linha);
     border-radius: 4px;
 }
 
-/* ===== AMIGOS ===== */
 .amigos {
     padding: 16px 12px;
     display: flex;
@@ -308,7 +283,6 @@ body.modo-2017 .icone {
     text-overflow: ellipsis;
 }
 
-/* ===== CARDS DE JOGOS ===== */
 .lista-jogos {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -319,7 +293,7 @@ body.modo-2017 .icone {
     background-color: var(--caixa);
     border: 1px solid var(--linha);
     border-radius: 4px;
-    overflow: hidden; /* a imagem respeita o canto arredondado */
+    overflow: hidden;
     padding-bottom: 10px;
 }
 
@@ -348,7 +322,6 @@ body.modo-2017 .icone {
     color: var(--cinza);
 }
 
-/* barrinha de avaliação embaixo do card */
 .barra {
     height: 5px;
     margin: 8px 8px 0;
@@ -360,7 +333,6 @@ body.modo-2017 .icone {
     background-color: var(--cinza);
 }
 
-/* ===== LADO DIREITO ===== */
 .lado-direito {
     width: 220px;
     flex-shrink: 0;
@@ -408,7 +380,6 @@ body.modo-2017 .icone {
     object-fit: cover;
 }
 
-/* ===== RODAPÉ ===== */
 .rodape {
     padding: 24px;
     border-top: 1px solid var(--linha);
@@ -418,7 +389,6 @@ body.modo-2017 .icone {
     line-height: 1.6;
 }
 
-/* ===== TELAS MENORES ===== */
 @media (max-width: 1200px) {
     .lista-jogos {
         grid-template-columns: repeat(4, 1fr);
@@ -460,13 +430,13 @@ body.modo-2017 .icone {
     }
 
     body {
-        padding-left: 0; /* no celular o menu fica em cima, não do lado */
+        padding-left: 0;
     }
 
     .container {
         padding: 20px 16px;
         flex-direction: column;
-        align-items: stretch; /* as colunas ocupam a largura da tela */
+        align-items: stretch;
     }
 
     .lado-direito {

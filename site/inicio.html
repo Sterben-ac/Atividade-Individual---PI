@@ -5,14 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sterben - Inicio</title>
 <link rel="icon" href="img/sterben-emblema.svg">
-<!-- fontes: Inter (navbar) e Source Sans 3 (a fonte do site do Roblox em 2016) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
 </head>
 <body>
 
-<!-- navbar (igual a do cadastro) -->
 <header class="navbar">
     <div class="nav-esquerda">
         <a href="inicio.html"><img src="img/sterben-emblema.svg" alt="Sterben" class="logo"></a>
@@ -22,14 +20,13 @@
         <a href="historia.html" class="link">Minha história</a>
     </div>
     <div class="nav-direita">
-        <button class="btn-2017">Modo 2017</button>
+        <button class="btn-2017" id="btn_2017" onclick="trocarModo()">Modo 2017</button>
         <img src="img/baconpfp.jpg" alt="avatar" class="avatar-nav">
         <span class="nome-nav">Sterben</span>
         <a href="index.html" class="sair">Sair</a>
     </div>
 </header>
 
-<!-- menu do lado -->
 <aside class="menu-lateral">
     <a href="inicio.html" class="item selecionado"><img src="img/icones/inicio.svg" alt="" class="icone"> Início</a>
     <a href="perfil.html" class="item"><img src="img/icones/perfil.svg" alt="" class="icone"> Perfil</a>
@@ -49,7 +46,6 @@
             <h1 class="saudacao">Olá, Sterben!</h1>
         </div>
 
-        <!-- AMIGOS -->
         <div class="titulo-secao">
             <h2>Amigos (9)</h2>
             <a href="#" class="btn">Ver todos</a>
@@ -93,7 +89,6 @@
             </div>
         </div>
 
-        <!-- jogados recentemente -->
         <div class="titulo-secao">
             <h2>Jogados recentemente</h2>
             <a href="#" class="btn">Ver todos</a>
@@ -137,7 +132,6 @@
             </div>
         </div>
 
-        <!-- favoritos -->
         <div class="titulo-secao">
             <h2>Meus favoritos</h2>
             <a href="#" class="btn">Ver todos</a>
@@ -171,7 +165,6 @@
 
     </main>
 
-    <!-- lado direito -->
     <aside class="lado-direito">
         <div class="banner">
             <img src="img/placeholder-banner.jpg" alt="banner">
