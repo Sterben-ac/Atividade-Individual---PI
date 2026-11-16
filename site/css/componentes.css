@@ -1,0 +1,573 @@
+:where(.principal) a {
+    color: var(--destaque-brilho);
+}
+
+.titulo-pagina {
+    margin-bottom: 20px;
+}
+
+.titulo-pagina h1 {
+    font-family: 'Chakra Petch', 'Source Sans 3', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.titulo-pagina p {
+    margin-top: 4px;
+    color: var(--cinza);
+    font-size: 17px;
+}
+
+.titulo-pagina .sobretitulo {
+    margin: 0 0 4px;
+    color: var(--destaque);
+    font-size: 13px;
+}
+
+.sobretitulo {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--destaque);
+    text-transform: uppercase;
+}
+
+.aviso {
+    margin-bottom: 18px;
+    padding: 12px 16px;
+    background-color: var(--caixa);
+    border: 1px solid var(--linha);
+    border-left: 4px solid var(--destaque);
+    border-radius: 4px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.aviso code {
+    padding: 1px 6px;
+    background-color: var(--caixa-hover);
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.painel {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: var(--caixa);
+    border: 1px solid var(--linha);
+    border-radius: 4px;
+}
+
+.painel h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.painel-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.painel-cabecalho h2 {
+    margin-bottom: 0;
+}
+
+.painel-cabecalho span {
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+.painel.vazio {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.painel.vazio p {
+    max-width: 560px;
+    margin: 0 auto 16px;
+    color: var(--cinza);
+    line-height: 1.5;
+}
+
+.texto-cinza {
+    color: var(--cinza);
+}
+
+.btn-grande {
+    display: inline-block;
+    padding: 10px 22px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-contorno {
+    display: inline-block;
+    padding: 9px 18px;
+    background-color: transparent;
+    color: var(--texto);
+    border: 1px solid var(--linha);
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-contorno:hover {
+    border-color: var(--destaque);
+}
+
+.form-id {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.campo {
+    height: 44px;
+    min-width: 260px;
+    padding: 0 14px;
+    background-color: var(--fundo);
+    color: var(--texto);
+    border: 1px solid var(--linha);
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.form-id input {
+    height: 44px;
+    min-width: 260px;
+    padding: 0 14px;
+    background-color: var(--fundo);
+    color: var(--texto);
+    border: 1px solid var(--linha);
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.campo:focus,
+.form-id input:focus {
+    outline: none;
+    border-color: var(--destaque);
+}
+
+.erro-campo {
+    min-height: 18px;
+    margin-top: 6px;
+    color: var(--destaque-brilho);
+    font-size: 14px;
+}
+
+.grade-numeros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.numero-card {
+    padding: 16px;
+    background-color: var(--caixa);
+    border: 1px solid var(--linha);
+    border-radius: 4px;
+}
+
+.numero-card .valor {
+    display: block;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.numero-card .rotulo {
+    display: block;
+    margin-top: 4px;
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+.numero-card .detalhe {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--texto-menu);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.numero-card.destaque {
+    border-top: 3px solid var(--destaque);
+}
+
+.robux::before {
+    content: '⬢ ';
+    color: var(--destaque);
+}
+
+.abas {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--linha);
+    flex-wrap: wrap;
+}
+
+.aba {
+    padding: 10px 18px;
+    background: none;
+    color: var(--cinza);
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-family: inherit;
+    font-size: 17px;
+    cursor: pointer;
+    margin-bottom: -1px;
+}
+
+.aba:hover {
+    color: var(--texto);
+}
+
+.aba.ativa {
+    color: var(--texto);
+    border-bottom-color: var(--destaque);
+    font-weight: 600;
+}
+
+.conteudo-aba {
+    display: none;
+}
+
+.conteudo-aba.ativo {
+    display: block;
+}
+
+.filtros {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    align-items: center;
+}
+
+.filtro {
+    padding: 6px 14px;
+    background-color: var(--caixa);
+    color: var(--texto-menu);
+    border: 1px solid var(--linha);
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filtro:hover {
+    border-color: var(--cinza);
+}
+
+.filtro.ativo {
+    background-color: var(--destaque);
+    border-color: var(--destaque);
+    color: white;
+}
+
+.filtros .campo {
+    height: 34px;
+    min-width: 220px;
+    margin-left: auto;
+    font-size: 14px;
+}
+
+.filtros select.campo {
+    min-width: 0;
+    margin-left: 0;
+}
+
+a.card,
+a.amigo {
+    color: var(--texto);
+    display: block;
+}
+
+.card .selo {
+    margin: 6px 8px 0;
+}
+
+.selo {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: var(--caixa-hover);
+    border: 1px solid var(--linha);
+    border-radius: 10px;
+    color: var(--texto-menu);
+    font-size: 12px;
+}
+
+.selo.vermelho {
+    background-color: var(--destaque);
+    border-color: var(--destaque);
+    color: white;
+}
+
+.lista-itens {
+    list-style: none;
+}
+
+.lista-itens li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--linha);
+}
+
+.lista-itens li:last-child {
+    border-bottom: none;
+}
+
+.lista-itens img {
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.lista-itens .item-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.lista-itens .item-texto strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lista-itens .item-texto span {
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+.lista-itens .item-valor {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.tabela th {
+    padding: 10px 8px;
+    text-align: left;
+    color: var(--cinza);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--linha);
+}
+
+.tabela td {
+    padding: 8px;
+    border-bottom: 1px solid var(--linha);
+    vertical-align: middle;
+}
+
+.tabela tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela .num {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.tabela img {
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+.positivo { color: #2EB872; }
+.negativo { color: var(--destaque-brilho); }
+
+.modal-fundo {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-fundo.aberto {
+    display: flex;
+}
+
+.modal {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 28px;
+    background-color: var(--caixa);
+    border: 1px solid var(--linha);
+    border-top: 4px solid var(--destaque);
+    border-radius: 4px;
+}
+
+.modal-fechar {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: var(--cinza);
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.modal-fechar:hover {
+    color: var(--texto);
+}
+
+.modal h2 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.modal p {
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.modal-emblema {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.modal-emblema img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.espaco-imagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 220px;
+    padding: 20px;
+    background-color: var(--caixa);
+    border: 2px dashed var(--linha);
+    border-radius: 6px;
+    color: var(--cinza);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.espaco-imagem::before {
+    content: '';
+    width: 42px;
+    height: 42px;
+    background:
+        radial-gradient(circle at 30% 32%, var(--cinza) 0 4px, transparent 5px),
+        linear-gradient(135deg, transparent 55%, var(--cinza) 55% 70%, transparent 70%),
+        var(--caixa-hover);
+    border: 2px solid var(--cinza);
+    border-radius: 6px;
+}
+
+.espaco-imagem strong {
+    color: var(--texto-menu);
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.carregando {
+    padding: 40px;
+    text-align: center;
+    color: var(--cinza);
+}
+
+.carregando::before {
+    content: '';
+    display: block;
+    width: 34px;
+    height: 34px;
+    margin: 0 auto 12px;
+    border: 4px solid var(--linha);
+    border-top-color: var(--destaque);
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 1200px) {
+    .grade-numeros {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .perfil-topo {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .perfil-contagens,
+    .perfil-acoes {
+        justify-content: center;
+    }
+
+    .duas-colunas {
+        grid-template-columns: 1fr;
+    }
+
+    .barras li {
+        grid-template-columns: 30px 110px 1fr 40px;
+    }
+
+    .filtros .campo {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.legenda-secao {
+    margin: -4px 0 8px;
+    color: var(--cinza);
+    font-size: 13px;
+}
