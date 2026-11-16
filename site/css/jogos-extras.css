@@ -119,6 +119,29 @@
     margin-top: 16px;
 }
 
+.placar-jogo {
+    max-width: 960px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.placar-jogo strong {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+}
+
+#canvas_tela {
+    width: 100%;
+    max-width: 960px;
+    display: block;
+    border: 1px solid var(--linha);
+    border-radius: 4px;
+    cursor: pointer;
+    touch-action: none;
+}
+
 @media (max-width: 700px) {
     .opcoes {
         grid-template-columns: 1fr;
