@@ -125,5 +125,13 @@
 
 <script src="js/layout.js"></script>
 <script src="js/tema.js"></script>
+<script src="js/jogos-dados.js"></script>
+<script>
+    let nomes = ``;
+    for (let i = 0; i < MEUS_JOGOS.length; i++) {
+        nomes += `<a class="selo" href="jogos.html?jogo=${i}">${MEUS_JOGOS[i].nome}</a> `;
+    }
+    div_chamada_lista.innerHTML = nomes;
+</script>
 </body>
 </html>
