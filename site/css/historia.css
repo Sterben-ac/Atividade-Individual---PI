@@ -1,0 +1,171 @@
+.artigo {
+    max-width: 1100px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.artigo p {
+    margin-bottom: 14px;
+}
+
+.artigo h2 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 28px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+}
+
+.abertura {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 20px 0 30px;
+}
+
+.abertura h1 {
+    margin: 10px 0 16px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 44px;
+    line-height: 1.1;
+}
+
+.abertura-texto {
+    color: var(--texto-menu);
+    font-size: 20px;
+}
+
+.espaco-imagem.alto {
+    min-height: 340px;
+}
+
+.marcos {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 10px 0 50px;
+    border-top: 2px solid var(--linha);
+}
+
+.marcos li {
+    position: relative;
+    padding: 22px 16px 0 0;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--texto-menu);
+}
+
+.marcos li::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    background-color: var(--destaque);
+    border: 3px solid var(--fundo);
+    border-radius: 50%;
+}
+
+.marcos span {
+    display: block;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--texto);
+}
+
+.bloco {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 56px;
+}
+
+.bloco.invertido .bloco-texto {
+    order: 2;
+}
+
+.bloco .espaco-imagem,
+.bloco img {
+    width: 100%;
+    min-height: 280px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.bloco-unico {
+    max-width: 760px;
+    margin: 0 auto 50px;
+}
+
+.citacao {
+    margin: 24px 0;
+    padding: 6px 0 6px 22px;
+    border-left: 4px solid var(--destaque);
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 26px;
+    line-height: 1.35;
+}
+
+.credito-texto {
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid var(--linha);
+    color: var(--cinza);
+    font-size: 15px;
+    font-style: italic;
+}
+
+.chamada-jogos {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 56px;
+    border-top: 3px solid var(--destaque);
+}
+
+.chamada-jogos h2 {
+    margin-bottom: 4px;
+}
+
+.chamada-jogos p {
+    margin-bottom: 0;
+    font-size: 16px;
+}
+
+.chamada-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.chamada-lista .selo {
+    color: var(--texto);
+    font-size: 14px;
+    padding: 4px 10px;
+}
+
+@media (max-width: 1000px) {
+    .abertura,
+    .bloco,
+    .chamada-jogos {
+        grid-template-columns: 1fr;
+    }
+
+    .bloco.invertido .bloco-texto {
+        order: 0;
+    }
+
+    .marcos {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 20px;
+    }
+
+    .abertura h1 {
+        font-size: 34px;
+    }
+}
