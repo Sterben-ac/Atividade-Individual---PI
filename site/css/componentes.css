@@ -321,6 +321,80 @@ a.amigo {
     color: white;
 }
 
+.perfil-topo {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+
+.perfil-avatar {
+    width: 220px;
+    height: 220px;
+    flex-shrink: 0;
+    background: radial-gradient(circle at 50% 40%, var(--caixa-hover), var(--fundo));
+    border: 1px solid var(--linha);
+    border-radius: 6px;
+    object-fit: contain;
+}
+
+.perfil-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.perfil-info h1 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 36px;
+    line-height: 1.1;
+}
+
+.perfil-info .arroba {
+    color: var(--cinza);
+    font-size: 17px;
+}
+
+.perfil-contagens {
+    display: flex;
+    gap: 28px;
+    margin: 16px 0;
+}
+
+.perfil-contagens strong {
+    display: block;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 24px;
+}
+
+.perfil-contagens span {
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+.perfil-descricao {
+    max-height: 120px;
+    overflow-y: auto;
+    white-space: pre-line;
+    color: var(--texto-menu);
+    line-height: 1.5;
+}
+
+.perfil-acoes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.duas-colunas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.duas-colunas .painel {
+    margin-bottom: 0;
+}
+
 .lista-itens {
     list-style: none;
 }
@@ -570,4 +644,10 @@ a.amigo {
     margin: -4px 0 8px;
     color: var(--cinza);
     font-size: 13px;
+}
+
+.numero-card .valor.robux::before,
+.numero-card .valor .robux::before {
+    font-size: 0.6em;
+    vertical-align: 0.15em;
 }

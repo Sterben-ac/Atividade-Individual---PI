@@ -84,6 +84,10 @@ npm start
 
 Depois abra **http://localhost:3000** no navegador.
 
+> [!TIP]
+> Também dá para abrir o `site/index.html` com dois cliques. Nesse caso o site funciona com **dados de exemplo**, porque sem o servidor não é possível buscar os dados do Roblox.
+
+
 
 ## 🟥 Cronograma
 

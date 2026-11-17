@@ -1,7 +1,7 @@
 {
   "name": "sterben-api",
   "version": "1.0.0",
-  "description": "Servidor do site Sterben: entrega as páginas do site",
+  "description": "Servidor do site Sterben: entrega as páginas e busca os dados do Roblox",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
