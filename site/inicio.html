@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sterben - Inicio</title>
+<title>Sterben · Início</title>
 <link rel="icon" href="img/sterben-emblema.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/componentes.css">
 </head>
-<body>
+<body data-pagina="inicio">
 
 <header class="navbar" id="div_navbar"></header>
 <aside class="menu-lateral" id="div_menu_lateral"></aside>
@@ -18,145 +18,55 @@
 <div class="container">
 
     <main class="principal">
+        <div id="div_aviso"></div>
 
         <div class="topo-perfil">
-            <img src="img/baconpfp.jpg" alt="meu avatar" class="foto-perfil">
-            <h1 class="saudacao">Olá, Sterben!</h1>
+            <img src="img/baconpfp.jpg" alt="meu avatar" class="foto-perfil" id="img_foto_perfil">
+            <div>
+                <h1 class="saudacao" id="div_saudacao">Olá!</h1>
+                <p class="texto-cinza" id="div_subtitulo"></p>
+            </div>
         </div>
 
+        <div id="div_area_sem_id"></div>
+
         <div class="titulo-secao">
-            <h2>Amigos (9)</h2>
-            <a href="#" class="btn">Ver todos</a>
+            <h2 id="div_titulo_amigos">Amigos</h2>
+            <a href="#" class="btn" id="link_ver_amigos" target="_blank">Ver todos</a>
         </div>
-        <div class="box amigos">
-            <div class="amigo">
-                <img src="img/baconpfp.jpg" alt="amigo">
-                <p>Amigo1</p>
-            </div>
-            <div class="amigo">
-                <img src="img/baconpfp.jpg" alt="amigo">
-                <p>Amigo2</p>
-            </div>
-            <div class="amigo">
-                <img src="img/baconpfp.jpg" alt="amigo">
-                <p>Amigo3</p>
-            </div>
-            <div class="amigo">
-                <img src="img/baconpfp.jpg" alt="amigo">
-                <p>Amigo4</p>
-            </div>
-            <div class="amigo">
-                <img src="img/baconpfp.jpg" alt="amigo">
-                <p>Amigo5</p>
-            </div>
-            <div class="amigo">
-                <img src="img/baconpfp.jpg" alt="amigo">
-                <p>Amigo6</p>
-            </div>
-            <div class="amigo">
-                <img src="img/baconpfp.jpg" alt="amigo">
-                <p>Amigo7</p>
-            </div>
-            <div class="amigo">
-                <img src="img/baconpfp.jpg" alt="amigo">
-                <p>Amigo8</p>
-            </div>
-            <div class="amigo">
-                <img src="img/baconpfp.jpg" alt="amigo">
-                <p>Amigo9</p>
-            </div>
+        <div class="box amigos" id="div_lista_amigos">
+            <p class="carregando">Carregando amigos...</p>
         </div>
 
         <div class="titulo-secao">
             <h2>Jogados recentemente</h2>
-            <a href="#" class="btn">Ver todos</a>
+            <a href="emblemas.html" class="btn">Ver todos</a>
         </div>
-        <div class="lista-jogos">
-            <div class="card">
-                <img src="img/uwu.jpg" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-                <p class="jogando">12 jogando</p>
-                <div class="barra"><div class="barra-cheia" style="width: 80%;"></div></div>
-            </div>
-            <div class="card">
-                <img src="img/face.png" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-                <p class="jogando">0 jogando</p>
-                <div class="barra"><div class="barra-cheia" style="width: 65%;"></div></div>
-            </div>
-            <div class="card">
-                <img src="img/uwu.jpg" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-                <p class="jogando">3.2K jogando</p>
-                <div class="barra"><div class="barra-cheia" style="width: 90%;"></div></div>
-            </div>
-            <div class="card">
-                <img src="img/face.png" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-                <p class="jogando">0 jogando</p>
-                <div class="barra"><div class="barra-cheia" style="width: 50%;"></div></div>
-            </div>
-            <div class="card">
-                <img src="img/uwu.jpg" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-                <p class="jogando">26 jogando</p>
-                <div class="barra"><div class="barra-cheia" style="width: 75%;"></div></div>
-            </div>
-            <div class="card">
-                <img src="img/face.png" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-                <p class="jogando">1 jogando</p>
-                <div class="barra"><div class="barra-cheia" style="width: 85%;"></div></div>
-            </div>
+        <p class="legenda-secao">Descoberto pelos seus emblemas mais recentes.</p>
+        <div class="lista-jogos" id="div_lista_recentes">
+            <p class="carregando">Carregando...</p>
         </div>
 
         <div class="titulo-secao">
             <h2>Meus favoritos</h2>
-            <a href="#" class="btn">Ver todos</a>
+            <a href="#" class="btn" id="link_ver_favoritos" target="_blank">Ver todos</a>
         </div>
-        <div class="lista-jogos">
-            <div class="card">
-                <img src="img/face.png" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-            </div>
-            <div class="card">
-                <img src="img/uwu.jpg" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-            </div>
-            <div class="card">
-                <img src="img/face.png" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-            </div>
-            <div class="card">
-                <img src="img/uwu.jpg" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-            </div>
-            <div class="card">
-                <img src="img/face.png" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-            </div>
-            <div class="card">
-                <img src="img/uwu.jpg" alt="jogo">
-                <p class="nome-jogo">Nome do jogo</p>
-            </div>
+        <div class="lista-jogos" id="div_lista_favoritos">
+            <p class="carregando">Carregando...</p>
         </div>
 
     </main>
 
     <aside class="lado-direito">
-        <div class="banner">
-            <img src="img/placeholder-banner.jpg" alt="banner">
-            <a href="minigame.html" class="btn btn-jogar">Jogar agora</a>
-        </div>
-        <p class="legenda">DESTAQUE</p>
+        <p class="legenda">JOGO EM DESTAQUE DO STERBEN</p>
+        <a href="jogos.html" class="destaque-jogo" id="link_destaque_jogo"></a>
 
-        <div class="box emblemas">
-            <img src="img/sterben-emblema.svg" alt="emblema">
-            <img src="img/baconpfp.jpg" alt="emblema">
-            <img src="img/sterben-emblema.svg" alt="emblema">
-            <img src="img/baconpfp.jpg" alt="emblema">
-            <img src="img/sterben-emblema.svg" alt="emblema">
-            <img src="img/baconpfp.jpg" alt="emblema">
+        <p class="legenda" style="margin-top: 20px;">EMBLEMAS RECENTES</p>
+        <a href="emblemas.html" class="box emblemas" id="link_emblemas_recentes"></a>
+
+        <p class="legenda" style="margin-top: 20px;">SUA JORNADA</p>
+        <div class="box mini-numeros" id="div_mini_numeros">
+            <p><span>Emblemas</span> <strong>—</strong></p>
         </div>
     </aside>
 
@@ -169,5 +79,9 @@
 
 <script src="js/layout.js"></script>
 <script src="js/tema.js"></script>
+<script src="js/dados-exemplo.js"></script>
+<script src="js/roblox.js"></script>
+<script src="js/jogos-dados.js"></script>
+<script src="js/inicio.js"></script>
 </body>
 </html>

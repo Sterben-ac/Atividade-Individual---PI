@@ -36,6 +36,38 @@ function perfil(req, res) {
         });
 }
 
+function amigos(req, res) {
+    let id = req.params.id;
+    if (!idValido(id)) {
+        res.status(400).json({ erro: `ID inválido` });
+        return;
+    }
+    robloxModel.amigos(id)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            responderErro(res, erro);
+        });
+}
+
+function favoritos(req, res) {
+    let id = req.params.id;
+    if (!idValido(id)) {
+        res.status(400).json({ erro: `ID inválido` });
+        return;
+    }
+    robloxModel.favoritos(id)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            responderErro(res, erro);
+        });
+}
+
 module.exports = {
-    perfil
+    perfil,
+    amigos,
+    favoritos
 };

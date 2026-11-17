@@ -99,6 +99,32 @@ async function buscarImagens(tipo, ids, tamanho, nomeParametro) {
     return mapa;
 }
 
+async function buscarJogos(idsJogos) {
+    let mapa = {};
+    let unicos = semRepetidos(idsJogos);
+    let pedacos = dividir(unicos, 50);
+    for (let p = 0; p < pedacos.length; p++) {
+        let resposta = await tentar(`https://games.roblox.com/v1/games?universeIds=${pedacos[p].join(`,`)}`, { data: [] });
+        for (let i = 0; i < resposta.data.length; i++) {
+            let jogo = resposta.data[i];
+            mapa[jogo.id] = {
+                id: jogo.id,
+                nome: jogo.name,
+                placeId: jogo.rootPlaceId,
+                jogando: jogo.playing,
+                visitas: jogo.visits,
+                criado: jogo.created,
+                genero: jogo.genre
+            };
+        }
+    }
+    let icones = await buscarImagens(`games/icons`, unicos, `150x150`, `universeIds`);
+    for (let id in mapa) {
+        mapa[id].icone = icones[id] || null;
+    }
+    return mapa;
+}
+
 async function perfil(id) {
     let usuario = await pedirRoblox(`https://users.roblox.com/v1/users/${id}`);
 
@@ -151,6 +177,61 @@ async function perfil(id) {
     };
 }
 
+async function amigos(id) {
+    let ids = [];
+    let achados = await tentar(`https://friends.roblox.com/v1/users/${id}/friends/find?userSort=FriendScore&limit=50`, null);
+    if (achados && achados.PageItems) {
+        for (let i = 0; i < achados.PageItems.length; i++) {
+            ids.push(achados.PageItems[i].id);
+        }
+    } else {
+        let antigo = await pedirRoblox(`https://friends.roblox.com/v1/users/${id}/friends`);
+        for (let i = 0; i < antigo.data.length; i++) {
+            ids.push(antigo.data[i].id);
+        }
+    }
+    let total = await tentar(`https://friends.roblox.com/v1/users/${id}/friends/count`, { count: ids.length });
+    ids = ids.slice(0, 18);
+
+    let nomes = await tentar(`https://users.roblox.com/v1/users`, { data: [] }, { userIds: ids, excludeBannedUsers: false });
+    let fotos = await buscarImagens(`users/avatar-headshot`, ids, `150x150`, `userIds`);
+
+    let lista = [];
+    for (let i = 0; i < ids.length; i++) {
+        let info = {};
+        for (let j = 0; j < nomes.data.length; j++) {
+            if (nomes.data[j].id == ids[i]) {
+                info = nomes.data[j];
+            }
+        }
+        lista.push({
+            id: ids[i],
+            nome: info.name || `ID ${ids[i]}`,
+            apelido: info.displayName || info.name || ``,
+            foto: fotos[ids[i]] || null
+        });
+    }
+    return { total: total.count, amigos: lista };
+}
+
+async function favoritos(id) {
+    let resposta = await pedirRoblox(`https://games.roblox.com/v2/users/${id}/favorite/games?limit=10&sortOrder=Desc`);
+    let ids = [];
+    for (let i = 0; i < resposta.data.length; i++) {
+        ids.push(resposta.data[i].id);
+    }
+    let detalhes = await buscarJogos(ids);
+    let jogos = [];
+    for (let i = 0; i < ids.length; i++) {
+        if (detalhes[ids[i]]) {
+            jogos.push(detalhes[ids[i]]);
+        }
+    }
+    return { jogos: jogos };
+}
+
 module.exports = {
-    perfil
+    perfil,
+    amigos,
+    favoritos
 };
