@@ -51,7 +51,7 @@ Jogo Roblox desde **2017**. O jogo foi uma das partes mais aguardadas do meu dia
 | Camada | Tecnologia |
 |:--|:--|
 | 🎨 Front-end | HTML, CSS e JavaScript |
-| ⚙️ Back-end | Node.js (API) |
+| ⚙️ Back-end | Node.js com Express (API) |
 | 🗄️ Banco de dados | MySQL, em uma máquina virtual Linux |
 | 📈 Gráficos | Chart.js |
 | 🗂️ Organização | Trello e Git/GitHub |
@@ -74,7 +74,16 @@ Jogo Roblox desde **2017**. O jogo foi uma das partes mais aguardadas do meu dia
 
 ## 🟥 Como executar
 
-> 🚧 *Em construção. As instruções serão adicionadas conforme o desenvolvimento avançar.*
+Precisa do [Node.js](https://nodejs.org/) instalado (versão 18 ou mais nova). Na pasta `api`:
+
+```bash
+cd api
+npm install     # só na primeira vez (baixa o Express)
+npm start
+```
+
+Depois abra **http://localhost:3000** no navegador.
+
 
 ## 🟥 Cronograma
 

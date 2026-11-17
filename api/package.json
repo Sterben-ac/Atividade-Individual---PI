@@ -1,0 +1,14 @@
+{
+  "name": "sterben-api",
+  "version": "1.0.0",
+  "description": "Servidor do site Sterben: entrega as páginas do site",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Alexandre Estiven Pari Villarroel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
