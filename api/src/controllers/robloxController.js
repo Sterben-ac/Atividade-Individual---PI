@@ -66,8 +66,24 @@ function favoritos(req, res) {
         });
 }
 
+function buscar(req, res) {
+    let texto = String(req.query.nome || ``).trim();
+    if (texto == ``) {
+        res.status(400).json({ erro: `Digite um nome ou ID` });
+        return;
+    }
+    robloxModel.buscar(texto)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            responderErro(res, erro);
+        });
+}
+
 module.exports = {
     perfil,
     amigos,
-    favoritos
+    favoritos,
+    buscar
 };

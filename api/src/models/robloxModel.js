@@ -230,8 +230,49 @@ async function favoritos(id) {
     return { jogos: jogos };
 }
 
+async function buscar(texto) {
+    let encontrados = [];
+
+    if (texto != `` && !isNaN(texto)) {
+        let u = await tentar(`https://users.roblox.com/v1/users/${texto}`, null);
+        if (u) {
+            encontrados.push({ id: u.id, nome: u.name, apelido: u.displayName });
+        }
+    } else {
+        let exato = await tentar(`https://users.roblox.com/v1/usernames/users`, { data: [] }, { usernames: [texto], excludeBannedUsers: false });
+        for (let i = 0; i < exato.data.length; i++) {
+            let u = exato.data[i];
+            encontrados.push({ id: u.id, nome: u.name, apelido: u.displayName, exato: true });
+        }
+        let parecidos = await tentar(`https://users.roblox.com/v1/users/search?keyword=${encodeURIComponent(texto)}&limit=10`, { data: [] });
+        for (let i = 0; i < parecidos.data.length; i++) {
+            let u = parecidos.data[i];
+            let jaTem = false;
+            for (let j = 0; j < encontrados.length; j++) {
+                if (encontrados[j].id == u.id) {
+                    jaTem = true;
+                }
+            }
+            if (!jaTem) {
+                encontrados.push({ id: u.id, nome: u.name, apelido: u.displayName });
+            }
+        }
+    }
+
+    let ids = [];
+    for (let i = 0; i < encontrados.length; i++) {
+        ids.push(encontrados[i].id);
+    }
+    let fotos = await buscarImagens(`users/avatar-headshot`, ids, `150x150`, `userIds`);
+    for (let i = 0; i < encontrados.length; i++) {
+        encontrados[i].foto = fotos[encontrados[i].id] || null;
+    }
+    return { resultados: encontrados.slice(0, 10) };
+}
+
 module.exports = {
     perfil,
     amigos,
-    favoritos
+    favoritos,
+    buscar
 };

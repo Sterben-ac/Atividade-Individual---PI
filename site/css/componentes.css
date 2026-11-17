@@ -646,6 +646,129 @@ a.amigo {
     font-size: 13px;
 }
 
+.busca-grande {
+    display: flex;
+    gap: 8px;
+}
+
+.busca-grande .campo {
+    flex: 1;
+    height: 50px;
+    font-size: 18px;
+}
+
+.resultados {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.resultado {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background-color: var(--fundo);
+    border: 1px solid var(--linha);
+    border-radius: 4px;
+}
+
+.resultado img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--caixa-hover);
+}
+
+.resultado .item-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.resultado strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.resultado span {
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+.resultado-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.resultado-acoes a {
+    font-size: 13px;
+    padding: 4px 10px;
+    text-align: center;
+}
+
+.comparacao {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comparacao-jogador {
+    text-align: center;
+    padding: 10px;
+}
+
+.comparacao-jogador img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+}
+
+.comparacao-jogador h3 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+}
+
+.comparacao-vs {
+    text-align: center;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 26px;
+    color: var(--destaque);
+}
+
+.tabela-comparar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-comparar td {
+    padding: 10px;
+    border-bottom: 1px solid var(--linha);
+    text-align: center;
+    width: 35%;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 20px;
+}
+
+.tabela-comparar td.rotulo-comparar {
+    width: 30%;
+    color: var(--cinza);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+}
+
+.tabela-comparar td.vence {
+    color: var(--destaque-brilho);
+}
+
+.tabela-comparar td.vence::after {
+    content: ' ★';
+    font-size: 14px;
+}
+
 .numero-card .valor.robux::before,
 .numero-card .valor .robux::before {
     font-size: 0.6em;
