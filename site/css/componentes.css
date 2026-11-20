@@ -956,6 +956,31 @@ a.amigo {
     vertical-align: 0.15em;
 }
 
+.grade-graficos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.grade-graficos .painel {
+    margin-bottom: 0;
+}
+
+.grafico.largo {
+    grid-column: 1 / -1;
+}
+
+.area-grafico {
+    position: relative;
+    height: 280px;
+}
+
+@media (max-width: 1000px) {
+    .grade-graficos {
+        grid-template-columns: 1fr;
+    }
+}
+
 .progresso-carga p {
     margin-bottom: 8px;
 }
