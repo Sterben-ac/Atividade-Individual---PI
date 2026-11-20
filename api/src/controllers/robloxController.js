@@ -86,6 +86,21 @@ function emblemas(req, res) {
         });
 }
 
+function inventario(req, res) {
+    let id = req.params.id;
+    if (!idValido(id)) {
+        res.status(400).json({ erro: `ID inválido` });
+        return;
+    }
+    robloxModel.inventario(id)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            responderErro(res, erro);
+        });
+}
+
 function buscar(req, res) {
     let texto = String(req.query.nome || ``).trim();
     if (texto == ``) {
@@ -106,5 +121,6 @@ module.exports = {
     amigos,
     favoritos,
     emblemas,
+    inventario,
     buscar
 };

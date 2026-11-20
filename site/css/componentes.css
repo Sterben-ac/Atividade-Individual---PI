@@ -615,6 +615,44 @@ a.amigo {
 .positivo { color: #2EB872; }
 .negativo { color: var(--destaque-brilho); }
 
+.grade-itens {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.item-visual {
+    background-color: var(--fundo);
+    border: 1px solid var(--linha);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.item-visual img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    background-color: var(--caixa-hover);
+}
+
+.item-visual div {
+    padding: 8px;
+}
+
+.item-visual strong {
+    display: block;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-visual span {
+    font-size: 13px;
+    color: var(--cinza);
+}
+
 .modal-fundo {
     position: fixed;
     inset: 0;
@@ -777,6 +815,18 @@ a.amigo {
     font-size: 13px;
 }
 
+.explicacao summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.explicacao p {
+    margin-top: 10px;
+    color: var(--texto-menu);
+    line-height: 1.55;
+}
+
 .busca-grande {
     display: flex;
     gap: 8px;
@@ -922,4 +972,81 @@ a.amigo {
     height: 100%;
     background-color: var(--destaque);
     transition: width 0.3s;
+}
+
+.barras.barras-largas li {
+    grid-template-columns: 160px 1fr 60px;
+}
+
+.curiosidades {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.curiosidade {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background-color: var(--fundo);
+    border: 1px solid var(--linha);
+    border-radius: 4px;
+}
+
+.curiosidade img,
+.curiosidade-numero {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.curiosidade-numero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--caixa-hover);
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--destaque);
+}
+
+.curiosidade strong {
+    display: block;
+    font-size: 17px;
+}
+
+.curiosidade span {
+    display: block;
+    font-size: 14px;
+}
+
+.cores-corpo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.cor-corpo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--texto-menu);
+}
+
+.cor-corpo span {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    border: 1px solid var(--linha);
+}
+
+@media (max-width: 1000px) {
+    .curiosidades {
+        grid-template-columns: 1fr;
+    }
 }

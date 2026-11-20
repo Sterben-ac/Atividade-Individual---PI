@@ -19,6 +19,10 @@ router.get(`/emblemas/:id`, function (req, res) {
     robloxController.emblemas(req, res);
 });
 
+router.get(`/inventario/:id`, function (req, res) {
+    robloxController.inventario(req, res);
+});
+
 router.get(`/buscar`, function (req, res) {
     robloxController.buscar(req, res);
 });

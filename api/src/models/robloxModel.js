@@ -356,6 +356,251 @@ async function emblemas(id, inicio, quantidade) {
     };
 }
 
+let TIPOS_ITEM = {
+    HAT: `Chapéus`, HAIR_ACCESSORY: `Cabelos`, FACE_ACCESSORY: `Acessórios de rosto`, NECK_ACCESSORY: `Pescoço`,
+    SHOULDER_ACCESSORY: `Ombros`, FRONT_ACCESSORY: `Frente`, BACK_ACCESSORY: `Costas`, WAIST_ACCESSORY: `Cintura`,
+    CLASSIC_SHIRT: `Camisas clássicas`, CLASSIC_PANTS: `Calças clássicas`, CLASSIC_TSHIRT: `Camisetas (T-shirts)`,
+    TSHIRT_ACCESSORY: `Camisetas 3D`, SHIRT_ACCESSORY: `Camisas 3D`, PANTS_ACCESSORY: `Calças 3D`, JACKET_ACCESSORY: `Jaquetas`,
+    SWEATER_ACCESSORY: `Blusas`, SHORTS_ACCESSORY: `Shorts`, DRESS_SKIRT_ACCESSORY: `Vestidos e saias`,
+    LEFT_SHOE_ACCESSORY: `Sapatos`, RIGHT_SHOE_ACCESSORY: `Sapatos`,
+    FACE: `Rostos`, HEAD: `Cabeças`, DYNAMIC_HEAD: `Cabeças animadas`, TORSO: `Partes do corpo`, LEFT_ARM: `Partes do corpo`,
+    RIGHT_ARM: `Partes do corpo`, LEFT_LEG: `Partes do corpo`, RIGHT_LEG: `Partes do corpo`,
+    GEAR: `Equipamentos (gears)`, EMOTE_ANIMATION: `Emotes`, CLIMB_ANIMATION: `Animações`, DEATH_ANIMATION: `Animações`,
+    FALL_ANIMATION: `Animações`, IDLE_ANIMATION: `Animações`, JUMP_ANIMATION: `Animações`, RUN_ANIMATION: `Animações`,
+    SWIM_ANIMATION: `Animações`, WALK_ANIMATION: `Animações`, POSE_ANIMATION: `Animações`, MOOD_ANIMATION: `Animações`,
+    PLACE: `Lugares`, DECAL: `Decalques`, AUDIO: `Áudios`, MODEL: `Modelos`, MESH_PART: `Modelos`, VIDEO: `Vídeos`,
+    PLUGIN: `Plugins`, ANIMATION: `Animações`, EYEBROW_ACCESSORY: `Rosto`, EYELASH_ACCESSORY: `Rosto`
+};
+
+function nomeDoTipo(tipo) {
+    if (TIPOS_ITEM[tipo]) {
+        return TIPOS_ITEM[tipo];
+    }
+    let texto = String(tipo || `Outros`).toLowerCase().split(`_`).join(` `);
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+function pedirDetalhesItem(assetId) {
+    return tentar(`https://economy.roblox.com/v2/assets/${assetId}/details`, null);
+}
+
+async function inventario(id) {
+    let itens = [];
+    let temMaisItens = false;
+    let motivoBloqueio = ``;
+    try {
+        let r = await inventarioOpenCloud(id, `inventoryItemAssetTypes=*`, 60);
+        for (let i = 0; i < r.itens.length; i++) {
+            if (r.itens[i].assetDetails) {
+                itens.push(r.itens[i]);
+            }
+        }
+        temMaisItens = r.temMais;
+    } catch (erro) {
+        motivoBloqueio = erro.message;
+    }
+
+    let porTipo = {};
+    let porAno = {};
+    let comData = [];
+    for (let i = 0; i < itens.length; i++) {
+        let tipo = nomeDoTipo(itens[i].assetDetails.inventoryItemAssetType);
+        porTipo[tipo] = (porTipo[tipo] || 0) + 1;
+        if (itens[i].addTime) {
+            let ano = new Date(itens[i].addTime).getFullYear();
+            porAno[ano] = (porAno[ano] || 0) + 1;
+            comData.push(itens[i]);
+        }
+    }
+
+    comData.sort(function (a, b) {
+        return new Date(b.addTime) - new Date(a.addTime);
+    });
+    let ultimos = comData.slice(0, 12);
+    let maisAntigo = null;
+    if (comData.length > 0) {
+        maisAntigo = comData[comData.length - 1];
+    }
+    let paraDetalhar = ultimos.slice();
+    if (maisAntigo) {
+        paraDetalhar.push(maisAntigo);
+    }
+    let detalhesUltimos = await emLotes(paraDetalhar, function (item) {
+        return pedirDetalhesItem(item.assetDetails.assetId);
+    });
+
+    let passes = null;
+    try {
+        passes = await inventarioOpenCloud(id, `gamePasses=true`, 20);
+    } catch (erro) {
+        console.log(`  aviso: ${erro.message}`);
+    }
+
+    let limitados = [];
+    let bloqueado = false;
+    let cursor = ``;
+    for (let p = 0; p < 10; p++) {
+        let url = `https://inventory.roblox.com/v1/users/${id}/assets/collectibles?limit=100&sortOrder=Desc`;
+        if (cursor) {
+            url += `&cursor=${cursor}`;
+        }
+        let pagina = await tentar(url, null);
+        if (pagina == null) {
+            bloqueado = true;
+            break;
+        }
+        limitados = limitados.concat(pagina.data);
+        cursor = pagina.nextPageCursor;
+        if (!cursor) {
+            break;
+        }
+    }
+    if (bloqueado && itens.length > 0) {
+        bloqueado = false;
+        let colecionaveis = [];
+        for (let i = 0; i < itens.length && colecionaveis.length < 150; i++) {
+            if (itens[i].assetDetails.collectibleDetails) {
+                colecionaveis.push(itens[i]);
+            }
+        }
+        let precos = await emLotes(colecionaveis, function (item) {
+            return tentar(`https://economy.roblox.com/v1/assets/${item.assetDetails.assetId}/resale-data`, null);
+        });
+        let nomes = await emLotes(colecionaveis, function (item) {
+            return pedirDetalhesItem(item.assetDetails.assetId);
+        });
+        limitados = [];
+        for (let i = 0; i < colecionaveis.length; i++) {
+            let assetId = Number(colecionaveis[i].assetDetails.assetId);
+            limitados.push({
+                assetId: assetId,
+                name: nomes[i] ? nomes[i].Name : `Item ${assetId}`,
+                serialNumber: colecionaveis[i].assetDetails.collectibleDetails.serialNumber || null,
+                recentAveragePrice: precos[i] ? precos[i].recentAveragePrice : 0,
+                originalPrice: null
+            });
+        }
+    }
+
+    let avatar = await tentar(`https://avatar.roblox.com/v2/avatar/users/${id}/avatar`, null);
+    let vestindo = await tentar(`https://avatar.roblox.com/v1/users/${id}/currently-wearing`, { assetIds: [] });
+    let idsVisual = vestindo.assetIds.slice(0, 30);
+    let detalhesVisual = await emLotes(idsVisual, pedirDetalhesItem);
+    let roupas = await tentar(`https://avatar.roblox.com/v2/avatar/users/${id}/outfits?page=1&itemsPerPage=24&isEditable=true`, { data: [] });
+    let listaRoupas = roupas.data || [];
+    let idsRoupas = [];
+    for (let i = 0; i < listaRoupas.length; i++) {
+        idsRoupas.push(listaRoupas[i].id);
+    }
+    let imagensRoupas = await buscarImagens(`users/outfits`, idsRoupas, `150x150`, `userOutfitIds`);
+    let corpo = await buscarImagens(`users/avatar`, [id], `420x420`, `userIds`);
+
+    let idsImagens = [];
+    for (let i = 0; i < limitados.length; i++) {
+        idsImagens.push(limitados[i].assetId);
+    }
+    for (let i = 0; i < idsVisual.length; i++) {
+        idsImagens.push(idsVisual[i]);
+    }
+    for (let i = 0; i < ultimos.length; i++) {
+        idsImagens.push(Number(ultimos[i].assetDetails.assetId));
+    }
+    if (maisAntigo) {
+        idsImagens.push(Number(maisAntigo.assetDetails.assetId));
+    }
+    let imagens = await buscarImagens(`assets`, idsImagens, `150x150`, `assetIds`);
+
+    let rolimons = await tentar(`https://api.rolimons.com/players/v1/playerinfo/${id}`, null);
+
+    function itemSimples(item, detalhe) {
+        let assetId = Number(item.assetDetails.assetId);
+        let criador = ``;
+        if (detalhe && detalhe.Creator) {
+            criador = detalhe.Creator.Name;
+        }
+        return {
+            id: assetId,
+            nome: detalhe ? detalhe.Name : `Item ${assetId}`,
+            criador: criador,
+            tipo: nomeDoTipo(item.assetDetails.inventoryItemAssetType),
+            data: item.addTime,
+            imagem: imagens[assetId] || null
+        };
+    }
+
+    let listaUltimos = [];
+    for (let i = 0; i < ultimos.length; i++) {
+        listaUltimos.push(itemSimples(ultimos[i], detalhesUltimos[i]));
+    }
+    let listaLimitados = [];
+    for (let i = 0; i < limitados.length; i++) {
+        let item = limitados[i];
+        listaLimitados.push({
+            id: item.assetId,
+            nome: item.name,
+            serial: item.serialNumber,
+            rap: item.recentAveragePrice || 0,
+            precoOriginal: item.originalPrice,
+            imagem: imagens[item.assetId] || null
+        });
+    }
+    let listaVisual = [];
+    for (let i = 0; i < idsVisual.length; i++) {
+        let d = detalhesVisual[i];
+        let criador = ``;
+        if (d && d.Creator) {
+            criador = d.Creator.Name;
+        }
+        listaVisual.push({
+            id: idsVisual[i],
+            nome: d ? d.Name : `Item ${idsVisual[i]}`,
+            preco: d ? d.PriceInRobux : null,
+            aVenda: d ? d.IsForSale : false,
+            limitado: d ? Boolean(d.IsLimited || d.IsLimitedUnique) : false,
+            criador: criador,
+            imagem: imagens[idsVisual[i]] || null
+        });
+    }
+    let emotes = [];
+    if (avatar && avatar.emotes) {
+        for (let i = 0; i < avatar.emotes.length; i++) {
+            emotes.push({ nome: avatar.emotes[i].assetName, posicao: avatar.emotes[i].position });
+        }
+    }
+    let listaRoupasFinal = [];
+    for (let i = 0; i < listaRoupas.length; i++) {
+        listaRoupasFinal.push({ id: listaRoupas[i].id, nome: listaRoupas[i].name, imagem: imagensRoupas[listaRoupas[i].id] || null });
+    }
+    let valorRolimons = null;
+    if (rolimons && rolimons.success !== false) {
+        valorRolimons = { valor: rolimons.value, rap: rolimons.rap };
+    }
+
+    return {
+        podeVer: itens.length > 0 || !motivoBloqueio,
+        motivoBloqueio: motivoBloqueio,
+        bloqueado: bloqueado,
+        totalItens: itens.length,
+        temMaisItens: temMaisItens,
+        totalPasses: passes ? passes.itens.length : null,
+        porTipo: porTipo,
+        porAno: porAno,
+        ultimos: listaUltimos,
+        maisAntigo: maisAntigo ? itemSimples(maisAntigo, detalhesUltimos[ultimos.length]) : null,
+        limitados: listaLimitados,
+        visual: listaVisual,
+        avatar: {
+            imagem: corpo[id] || null,
+            tipo: avatar ? avatar.playerAvatarType : null,
+            cores: avatar && avatar.bodyColor3s ? avatar.bodyColor3s : null,
+            escala: avatar ? avatar.scales : null,
+            emotes: emotes
+        },
+        roupas: listaRoupasFinal,
+        rolimons: valorRolimons
+    };
+}
+
 async function buscar(texto) {
     let encontrados = [];
 
@@ -401,5 +646,6 @@ module.exports = {
     amigos,
     favoritos,
     emblemas,
+    inventario,
     buscar
 };
