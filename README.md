@@ -103,7 +103,32 @@ Desde março de 2026, o Roblox só entrega a lista de emblemas e o inventário d
 > [!NOTE]
 > Para ver emblemas e inventário de **outros** jogadores, o inventário deles precisa estar público (Configurações > Privacidade > Quem pode ver meu inventário: Todos).
 
+### Estrutura
 
+```
+api/        servidor Node.js com Express: app.js liga o servidor; src/routes, src/controllers
+            e src/models fazem a ponte com a API do Roblox (como no Web Data Viz)
+site/       páginas (HTML), estilos (css/), scripts (js/) e imagens (img/)
+docs/       documentação e diário de prompts
+```
+
+### Páginas
+
+| Página | O que mostra |
+|:--|:--|
+| `index.html` | Cadastro e login |
+| `inicio.html` | Saudação, amigos, jogados recentemente (pelos emblemas) e favoritos |
+| `historia.html` | Minha história no Roblox |
+| `jogos.html` | Jogos que me marcaram |
+| `perfil.html` | Perfil do Roblox (o meu ou de outro jogador com `?id=`) |
+| `jogador.html` | Buscar jogador e comparar contas |
+| `emblemas.html` | Linha do tempo, emblemas por jogo e os mais raros |
+| `inventario.html` | Valor dos itens limitados (RAP) e custo do visual atual |
+| `dashboard.html` | Indicadores da jornada, da conta e do quiz (Chart.js) |
+| `quiz.html` / `minigame.html` | Quiz sobre Roblox e o minigame Obby Runner |
+
+> [!NOTE]
+> Por enquanto, o cadastro e o login ficam salvos no navegador (`localStorage`). A próxima etapa é levar os usuários para o MySQL.
 
 ## 🟥 Cronograma
 
