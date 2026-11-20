@@ -78,7 +78,7 @@ Precisa do [Node.js](https://nodejs.org/) instalado (versão 18 ou mais nova). N
 
 ```bash
 cd api
-npm install     # só na primeira vez (baixa o Express)
+npm install     # só na primeira vez (baixa o Express e o dotenv)
 npm start
 ```
 
@@ -86,6 +86,22 @@ Depois abra **http://localhost:3000** no navegador.
 
 > [!TIP]
 > Também dá para abrir o `site/index.html` com dois cliques. Nesse caso o site funciona com **dados de exemplo**, porque sem o servidor não é possível buscar os dados do Roblox.
+
+### Chave da API do Roblox (para emblemas e inventário)
+
+Desde março de 2026, o Roblox só entrega a lista de emblemas e o inventário de um jogador para quem usa a API oficial (**Open Cloud**) com uma chave. Sem a chave, essas partes mostram dados de exemplo.
+
+1. Entre em [create.roblox.com/dashboard/credentials](https://create.roblox.com/dashboard/credentials) com a sua conta e crie uma **API Key**.
+2. Em **Access Permissions**, adicione o sistema **Inventory** (`inventory-item`) com permissão de **leitura**.
+3. Em **Accepted IP Addresses**, coloque o IP do seu computador (ou `0.0.0.0/0` para aceitar qualquer um, só durante os testes).
+4. Salve e copie a chave. Na pasta `api`, copie o arquivo `.env.exemplo` com o nome `.env` e cole a chave na linha `ROBLOX_API_KEY=`.
+5. Reinicie o servidor (`Ctrl + C` e `npm start` de novo).
+
+> [!WARNING]
+> A chave é secreta, como uma senha. O arquivo `.env` está no `.gitignore` para nunca ir para o GitHub.
+
+> [!NOTE]
+> Para ver emblemas e inventário de **outros** jogadores, o inventário deles precisa estar público (Configurações > Privacidade > Quem pode ver meu inventário: Todos).
 
 
 

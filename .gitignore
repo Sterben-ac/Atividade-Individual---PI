@@ -1,3 +1,6 @@
 # chave secreta da API do Roblox: nunca enviar para o GitHub
 api/chave-roblox.txt
 node_modules/
+
+# arquivo com a chave secreta (copie o .env.exemplo)
+api/.env

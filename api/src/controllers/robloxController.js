@@ -66,6 +66,26 @@ function favoritos(req, res) {
         });
 }
 
+function emblemas(req, res) {
+    let id = req.params.id;
+    if (!idValido(id)) {
+        res.status(400).json({ erro: `ID inválido` });
+        return;
+    }
+    let inicio = Number(req.query.inicio) || 0;
+    let quantidade = Number(req.query.quantidade) || 100;
+    if (quantidade > 300) {
+        quantidade = 300;
+    }
+    robloxModel.emblemas(id, inicio, quantidade)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            responderErro(res, erro);
+        });
+}
+
 function buscar(req, res) {
     let texto = String(req.query.nome || ``).trim();
     if (texto == ``) {
@@ -85,5 +105,6 @@ module.exports = {
     perfil,
     amigos,
     favoritos,
+    emblemas,
     buscar
 };

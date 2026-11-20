@@ -125,6 +125,22 @@ async function buscarJogos(idsJogos) {
     return mapa;
 }
 
+async function emLotes(lista, funcao) {
+    let resultados = [];
+    let pedacos = dividir(lista, 10);
+    for (let p = 0; p < pedacos.length; p++) {
+        let pedidos = [];
+        for (let i = 0; i < pedacos[p].length; i++) {
+            pedidos.push(funcao(pedacos[p][i]));
+        }
+        let respostas = await Promise.all(pedidos);
+        for (let i = 0; i < respostas.length; i++) {
+            resultados.push(respostas[i]);
+        }
+    }
+    return resultados;
+}
+
 async function perfil(id) {
     let usuario = await pedirRoblox(`https://users.roblox.com/v1/users/${id}`);
 
@@ -230,6 +246,116 @@ async function favoritos(id) {
     return { jogos: jogos };
 }
 
+async function inventarioOpenCloud(id, filtro, paginas) {
+    let chaveApi = process.env.ROBLOX_API_KEY;
+    if (!chaveApi) {
+        throw new Error(`falta a chave da API do Roblox (ROBLOX_API_KEY no arquivo api/.env). Veja o README.`);
+    }
+    let itens = [];
+    let token = ``;
+    for (let p = 0; p < paginas; p++) {
+        let url = `https://apis.roblox.com/cloud/v2/users/${id}/inventory-items?maxPageSize=100&filter=${encodeURIComponent(filtro)}`;
+        if (token) {
+            url += `&pageToken=${encodeURIComponent(token)}`;
+        }
+        let pagina;
+        try {
+            pagina = await pedirRoblox(url, null, { 'x-api-key': chaveApi });
+        } catch (erro) {
+            if (erro.status == 401) {
+                erro.message = `a chave da API foi recusada (confira se ela está certa, ativa e com permissão de Inventário)`;
+            }
+            if (erro.status == 403) {
+                erro.message = `o inventário desta pessoa é privado (Configurações > Privacidade > Quem pode ver meu inventário)`;
+            }
+            throw erro;
+        }
+        itens = itens.concat(pagina.inventoryItems || []);
+        token = pagina.nextPageToken;
+        if (!token) {
+            break;
+        }
+    }
+    return { itens: itens, temMais: Boolean(token) };
+}
+
+async function listarEmblemasDoJogador(id) {
+    let resultado = await inventarioOpenCloud(id, `badges=true`, 200);
+    let lista = [];
+    for (let i = 0; i < resultado.itens.length; i++) {
+        let item = resultado.itens[i];
+        if (item.badgeDetails) {
+            lista.push({ id: Number(item.badgeDetails.badgeId), data: item.addTime });
+        }
+    }
+    lista.sort(function (a, b) {
+        return new Date(b.data) - new Date(a.data);
+    });
+    return lista;
+}
+
+async function emblemas(id, inicio, quantidade) {
+    let lista = await listarEmblemasDoJogador(id);
+    let pedaco = lista.slice(inicio, inicio + quantidade);
+    let ids = [];
+    for (let i = 0; i < pedaco.length; i++) {
+        ids.push(pedaco[i].id);
+    }
+
+    let detalhes = await emLotes(ids, function (idEmblema) {
+        return tentar(`https://badges.roblox.com/v1/badges/${idEmblema}`, null);
+    });
+    let icones = await buscarImagens(`badges/icons`, ids, `150x150`, `badgeIds`);
+
+    let listaEmblemas = [];
+    let idsJogos = [];
+    for (let i = 0; i < pedaco.length; i++) {
+        let d = detalhes[i] || {};
+        let estatisticas = d.statistics || {};
+        let jogo = d.awardingUniverse || null;
+
+        let raridade = null;
+        if (estatisticas.winRatePercentage != null) {
+            raridade = Number((estatisticas.winRatePercentage * 100).toFixed(2));
+        }
+        let jogoId = null;
+        let jogoNome = null;
+        if (jogo) {
+            jogoId = jogo.id;
+            jogoNome = jogo.name;
+        }
+        listaEmblemas.push({
+            id: pedaco[i].id,
+            nome: d.displayName || d.name || `Emblema ${pedaco[i].id}`,
+            descricao: d.displayDescription || d.description || ``,
+            data: pedaco[i].data,
+            raridade: raridade,
+            conquistados: estatisticas.awardedCount,
+            jogoId: jogoId,
+            jogoNome: jogoNome,
+            icone: icones[pedaco[i].id] || null
+        });
+        idsJogos.push(jogoId);
+    }
+
+    let jogos = await buscarJogos(idsJogos);
+    let primeiraData = null;
+    let ultimaData = null;
+    if (lista.length > 0) {
+        primeiraData = lista[lista.length - 1].data;
+        ultimaData = lista[0].data;
+    }
+    return {
+        total: lista.length,
+        inicio: inicio,
+        temMais: inicio + quantidade < lista.length,
+        primeiraData: primeiraData,
+        ultimaData: ultimaData,
+        emblemas: listaEmblemas,
+        jogos: jogos
+    };
+}
+
 async function buscar(texto) {
     let encontrados = [];
 
@@ -274,5 +400,6 @@ module.exports = {
     perfil,
     amigos,
     favoritos,
+    emblemas,
     buscar
 };

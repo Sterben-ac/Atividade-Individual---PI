@@ -441,6 +441,137 @@ a.amigo {
     white-space: nowrap;
 }
 
+.barras {
+    list-style: none;
+}
+
+.barras li {
+    display: grid;
+    grid-template-columns: 34px 180px 1fr 50px;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+}
+
+.barras.sem-icone li {
+    grid-template-columns: 60px 1fr 50px;
+}
+
+.barras img {
+    width: 34px;
+    height: 34px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.barras .barra-nome {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.barras .barra-fundo {
+    height: 12px;
+    background-color: var(--caixa-hover);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.barras .barra-valor {
+    height: 100%;
+    background-color: var(--destaque);
+    border-radius: 6px;
+}
+
+.barras .barra-numero {
+    text-align: right;
+    font-weight: 600;
+}
+
+.grade-emblemas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+}
+
+.emblema {
+    padding: 12px 10px;
+    background-color: var(--caixa);
+    border: 1px solid var(--linha);
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.emblema:hover {
+    border-color: var(--cinza);
+}
+
+.emblema img {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.emblema strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.25;
+    height: 35px;
+    overflow: hidden;
+}
+
+.emblema span {
+    display: block;
+    margin-top: 4px;
+    color: var(--cinza);
+    font-size: 12px;
+}
+
+.raridade-lendario { color: #FFB020; }
+.raridade-epico { color: #B86BFF; }
+.raridade-raro { color: #3FA9FF; }
+.raridade-comum { color: var(--cinza); }
+
+.emblema.lendario { border-color: #FFB020; }
+.emblema.epico { border-color: #B86BFF; }
+
+.linha-tempo-ano {
+    margin-bottom: 18px;
+}
+
+.linha-tempo-ano h3 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--linha);
+}
+
+.linha-tempo-ano h3 span {
+    color: var(--cinza);
+    font-size: 15px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+}
+
+.fila-emblemas {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.fila-emblemas img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--linha);
+    object-fit: cover;
+    cursor: pointer;
+}
+
 .tabela {
     width: 100%;
     border-collapse: collapse;
@@ -773,4 +904,22 @@ a.amigo {
 .numero-card .valor .robux::before {
     font-size: 0.6em;
     vertical-align: 0.15em;
+}
+
+.progresso-carga p {
+    margin-bottom: 8px;
+}
+
+.barra-progresso-carga {
+    height: 10px;
+    margin-bottom: 10px;
+    background-color: var(--caixa-hover);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.barra-progresso-carga div {
+    height: 100%;
+    background-color: var(--destaque);
+    transition: width 0.3s;
 }

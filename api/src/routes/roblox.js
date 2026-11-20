@@ -15,6 +15,10 @@ router.get(`/favoritos/:id`, function (req, res) {
     robloxController.favoritos(req, res);
 });
 
+router.get(`/emblemas/:id`, function (req, res) {
+    robloxController.emblemas(req, res);
+});
+
 router.get(`/buscar`, function (req, res) {
     robloxController.buscar(req, res);
 });

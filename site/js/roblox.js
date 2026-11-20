@@ -147,3 +147,40 @@ function formatarPorcentagem(numero) {
     }
     return `${numero.toLocaleString(`pt-BR`, { maximumFractionDigits: 2 })}%`;
 }
+
+function todosEmblemas(id, aoProgredir) {
+    let lista = [];
+    let jogos = {};
+
+    function buscarPedaco(inicio) {
+        return roblox.emblemas(id, 200, inicio).then(function (dados) {
+            lista = lista.concat(dados.emblemas);
+            for (let chave in dados.jogos) {
+                jogos[chave] = dados.jogos[chave];
+            }
+            if (aoProgredir) {
+                aoProgredir(lista.length, dados.total);
+            }
+
+            let acabou = usandoExemplo || !dados.temMais || dados.emblemas.length == 0;
+            if (acabou) {
+                return { total: dados.total, temMais: false, primeiraData: dados.primeiraData, ultimaData: dados.ultimaData, emblemas: lista, jogos: jogos };
+            }
+            return buscarPedaco(lista.length);
+        });
+    }
+
+    return buscarPedaco(0);
+}
+
+function htmlProgresso(carregados, total) {
+    let porcento = 0;
+    if (total) {
+        porcento = Math.round(carregados / total * 100);
+    }
+    return `<div class="painel progresso-carga">` +
+        `<p>Carregando emblemas: <strong>${formatarNumero(carregados)}</strong> de <strong>${formatarNumero(total)}</strong></p>` +
+        `<div class="barra-progresso-carga"><div style="width: ${porcento}%;"></div></div>` +
+        `<p class="texto-cinza">Contas com muitos emblemas demoram alguns minutos na primeira vez. Depois fica guardado por 30 minutos.</p>` +
+        `</div>`;
+}
