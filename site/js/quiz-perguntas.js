@@ -36,10 +36,10 @@ let PERGUNTAS = [
         explicacao: `O Roblox Studio é o programa gratuito usado para construir e programar as experiências.`
     },
     {
-        pergunta: `Qual linguagem de programação é usada nos jogos do Roblox?`,
-        opcoes: [`Python`, `Java`, `Lua (Luau)`, `C#`],
-        correta: 2,
-        explicacao: `Os scripts são escritos em Luau, uma versão da linguagem Lua feita pelo Roblox.`
+        pergunta: `De onde vem o nome "Roblox"?`,
+        opcoes: [`De "robbery" + "box"`, `Do nome do fundador`, `De uma palavra em sueco`, `De "robots" + "blocks"`],
+        correta: 3,
+        explicacao: `O nome junta "robots" (robôs) e "blocks" (blocos). Antes de 2004, o projeto se chamava DynaBlocks.`
     },
     {
         pergunta: `Qual cabelo padrão virou apelido para jogadores iniciantes?`,
@@ -48,15 +48,15 @@ let PERGUNTAS = [
         explicacao: `O "Bacon Hair" vinha em avatares novos, por isso virou sinônimo de quem acabou de chegar.`
     },
     {
-        pergunta: `Swordburst 2, um dos jogos que me marcaram, é inspirado em qual anime?`,
-        opcoes: [`Naruto`, `One Piece`, `Dragon Ball`, `Sword Art Online`],
-        correta: 3,
-        explicacao: `Subir andares e enfrentar chefes, como em Sword Art Online, é a base do jogo.`
+        pergunta: `Em que ano o som clássico de "oof" foi substituído?`,
+        opcoes: [`2019`, `2020`, `2022`, `2024`],
+        correta: 2,
+        explicacao: `O "oof" foi trocado em 2022 por um som novo, e muitos jogadores sentiram falta.`
     },
     {
-        pergunta: `No Deathrun, o que um dos jogadores controla?`,
-        opcoes: [`O tempo da partida`, `As armadilhas do mapa`, `Os outros jogadores`, `O clima`],
-        correta: 1,
-        explicacao: `Um jogador ativa as armadilhas e todos os outros tentam atravessar o mapa sem morrer.`
+        pergunta: `Qual jogo do Roblox, lançado em 2025, bateu o recorde mundial de jogadores simultâneos e passou o Fortnite?`,
+        opcoes: [`Brookhaven RP`, `Adopt Me!`, `Grow a Garden`, `Blox Fruits`],
+        correta: 2,
+        explicacao: `O Grow a Garden chegou a 21,6 milhões de jogadores ao mesmo tempo, recorde registrado pelo Guinness.`
     }
 ];
