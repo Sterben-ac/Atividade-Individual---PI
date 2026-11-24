@@ -17,7 +17,7 @@ let MEUS_JOGOS = [
         genero: `RPG`,
         ano: 2018,
         nota: 10,
-        imagem: ``,
+        imagem: `img/jogos/swordburst2.jpg`,
         sugestaoImagem: `Print de um dos andares ou de uma luta contra chefe`,
         resumo: `Subir andares e enfrentar chefes como em Sword Art Online.`,
         texto: [
@@ -30,7 +30,7 @@ let MEUS_JOGOS = [
         genero: `Tycoon`,
         ano: 2018,
         nota: 10,
-        imagem: ``,
+        imagem: `img/jogos/retail_tycoon.jpg`,
         sugestaoImagem: `Print da sua loja montada, de preferência cheia de clientes`,
         resumo: `O auge da diversão pela criatividade: montar e gerenciar a própria loja.`,
         texto: [
@@ -43,7 +43,7 @@ let MEUS_JOGOS = [
         genero: `Sobrevivência`,
         ano: 2017,
         nota: 8,
-        imagem: ``,
+        imagem: `img/jogos/natural_disaster_survival.jpg`,
         sugestaoImagem: `Print de um desastre acontecendo no mapa`,
         resumo: `Um clássico que virou kit e ajudou a nascer vários outros jogos.`,
         texto: [
@@ -56,7 +56,7 @@ let MEUS_JOGOS = [
         genero: `Sobrevivência`,
         ano: 2019,
         nota: 9,
-        imagem: ``,
+        imagem: `img/jogos/SEWH.jpg`,
         sugestaoImagem: `Print mostrando a estética antiga do jogo ou algum item (gear)`,
         resumo: `A versão mais completa da ideia de sobreviver a desastres.`,
         texto: [
@@ -69,7 +69,7 @@ let MEUS_JOGOS = [
         genero: `Obstáculos`,
         ano: 2017,
         nota: 8,
-        imagem: ``,
+        imagem: `img/jogos/deathrun.jpg`,
         sugestaoImagem: `Print de um mapa cheio de armadilhas`,
         resumo: `Um jogador controla as armadilhas; todos os outros tentam sobreviver.`,
         texto: [
