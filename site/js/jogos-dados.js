@@ -4,7 +4,7 @@ let MEUS_JOGOS = [
         genero: `RPG`,
         ano: 2017,
         nota: 9,
-        imagem: ``,
+        imagem: `img/jogos/ninja-assasin.jpg`,
         sugestaoImagem: `Print do seu ninja com a aura mais forte que você conseguiu`,
         resumo: `Treinar, ficar mais forte e exibir a aura mais bonita do servidor.`,
         texto: [
