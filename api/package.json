@@ -1,7 +1,7 @@
 {
   "name": "sterben-api",
   "version": "1.0.0",
-  "description": "Servidor do site Sterben: entrega as páginas e busca os dados do Roblox",
+  "description": "Servidor do site Sterben: entrega as páginas, conecta ao MySQL e busca os dados do Roblox",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mysql2": "^3.11.0"
   }
 }
