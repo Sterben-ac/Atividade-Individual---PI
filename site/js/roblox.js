@@ -94,20 +94,30 @@ function vincularId() {
         div_erro_vincular.innerHTML = `O ID tem que ter só números.`;
         return;
     }
-    sessao.robloxId = valor;
-    salvarSessao();
+    if (sessao.idUsuario == null) {
+        div_erro_vincular.innerHTML = `Saia e entre de novo na sua conta para vincular o ID.`;
+        return;
+    }
 
-    let usuarios = JSON.parse(localStorage.getItem(`sterben_usuarios`));
-    if (usuarios == null) {
-        usuarios = [];
-    }
-    for (let i = 0; i < usuarios.length; i++) {
-        if (usuarios[i].usuario == sessao.usuario) {
-            usuarios[i].robloxId = valor;
-        }
-    }
-    localStorage.setItem(`sterben_usuarios`, JSON.stringify(usuarios));
-    window.location.reload();
+    fetch(`/usuarios/${sessao.idUsuario}/roblox`, {
+        method: `PUT`,
+        headers: { 'Content-Type': `application/json` },
+        body: JSON.stringify({ robloxId: valor })
+    })
+        .then(function (resposta) {
+            return resposta.json().then(function (json) {
+                if (resposta.ok) {
+                    sessao.robloxId = valor;
+                    salvarSessao();
+                    window.location.reload();
+                } else {
+                    div_erro_vincular.innerHTML = json.mensagem;
+                }
+            });
+        })
+        .catch(function () {
+            div_erro_vincular.innerHTML = `Não foi possível falar com o servidor. Ele está ligado (npm start)?`;
+        });
 }
 
 function nivelRaridade(porcentagem) {

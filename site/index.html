@@ -67,6 +67,7 @@
                 </p>
 
                 <button type="button" class="botao-cadastrar" onclick="cadastrar()">Cadastrar</button>
+                <p class="erro-campo" id="div_erro_cadastro"></p>
             </form>
         </div>
 
@@ -111,16 +112,8 @@
             window.location.href = `inicio.html`;
         }
 
-        function lerUsuarios() {
-            let salvos = localStorage.getItem(`sterben_usuarios`);
-            if (salvos == null) {
-                return [];
-            }
-            return JSON.parse(salvos);
-        }
-
         function abrirSessao(usuario) {
-            let sessao = { usuario: usuario.usuario, robloxId: usuario.robloxId, foto: null };
+            let sessao = { idUsuario: usuario.idUsuario, usuario: usuario.usuario, robloxId: usuario.robloxId, foto: null };
             localStorage.setItem(`sterben_sessao`, JSON.stringify(sessao));
             window.location.href = `inicio.html`;
         }
@@ -141,20 +134,14 @@
             let confirmarVar = input_confirmar.value;
             let robloxIdVar = input_roblox.value.trim();
 
-            let usuarios = lerUsuarios();
             let valido = true;
             let erro = ``;
+            div_erro_cadastro.innerHTML = ``;
 
             if (usuarioVar.length < 3 || usuarioVar.length > 20) {
                 erro = `Use de 3 a 20 caracteres.`;
             } else if (usuarioVar.indexOf(` `) != -1) {
                 erro = `Não use espaço no nome de usuário.`;
-            } else {
-                for (let i = 0; i < usuarios.length; i++) {
-                    if (usuarios[i].usuario.toLowerCase() == usuarioVar.toLowerCase()) {
-                        erro = `Esse nome já está em uso.`;
-                    }
-                }
             }
             mostrarErro(`usuario`, erro);
             if (erro != ``) { valido = false; }
@@ -164,12 +151,6 @@
             let posicaoPonto = emailVar.lastIndexOf(`.`);
             if (posicaoArroba < 1 || posicaoPonto < posicaoArroba + 2 || posicaoPonto == emailVar.length - 1) {
                 erro = `Digite um e-mail válido (ex.: nome@email.com).`;
-            } else {
-                for (let i = 0; i < usuarios.length; i++) {
-                    if (usuarios[i].email == emailVar) {
-                        erro = `Esse e-mail já foi cadastrado.`;
-                    }
-                }
             }
             mostrarErro(`email`, erro);
             if (erro != ``) { valido = false; }
@@ -207,35 +188,57 @@
                 return;
             }
 
-            let novoUsuario = { usuario: usuarioVar, email: emailVar, senha: senhaVar, robloxId: robloxIdVar };
-            usuarios.push(novoUsuario);
-            localStorage.setItem(`sterben_usuarios`, JSON.stringify(usuarios));
-            abrirSessao(novoUsuario);
+            fetch(`/usuarios/cadastrar`, {
+                method: `POST`,
+                headers: { 'Content-Type': `application/json` },
+                body: JSON.stringify({ usuario: usuarioVar, email: emailVar, senha: senhaVar, robloxId: robloxIdVar })
+            })
+                .then(function (resposta) {
+                    return resposta.json().then(function (json) {
+                        if (resposta.ok) {
+                            abrirSessao(json);
+                        } else if (json.campo) {
+                            mostrarErro(json.campo, json.mensagem);
+                        } else {
+                            div_erro_cadastro.innerHTML = json.mensagem;
+                        }
+                    });
+                })
+                .catch(function () {
+                    div_erro_cadastro.innerHTML = `Não foi possível falar com o servidor. Ele está ligado (npm start)?`;
+                });
         }
 
         function logar() {
             let usuarioVar = input_login_usuario.value.trim();
             let senhaVar = input_login_senha.value;
-            let mensagem = div_login_mensagem;
 
             if (usuarioVar == `` || senhaVar == ``) {
-                mensagem.innerHTML = `Preencha usuário e senha.`;
+                div_login_mensagem.innerHTML = `Preencha usuário e senha.`;
                 return;
             }
 
-            let usuarios = lerUsuarios();
-            for (let i = 0; i < usuarios.length; i++) {
-                let u = usuarios[i];
-                if ((u.usuario.toLowerCase() == usuarioVar.toLowerCase() || u.email == usuarioVar) && u.senha == senhaVar) {
-                    abrirSessao(u);
-                    return;
-                }
-            }
-            mensagem.innerHTML = `Usuário ou senha incorretos.`;
+            fetch(`/usuarios/autenticar`, {
+                method: `POST`,
+                headers: { 'Content-Type': `application/json` },
+                body: JSON.stringify({ login: usuarioVar, senha: senhaVar })
+            })
+                .then(function (resposta) {
+                    return resposta.json().then(function (json) {
+                        if (resposta.ok) {
+                            abrirSessao(json);
+                        } else {
+                            div_login_mensagem.innerHTML = json.mensagem;
+                        }
+                    });
+                })
+                .catch(function () {
+                    div_login_mensagem.innerHTML = `Não foi possível falar com o servidor. Ele está ligado (npm start)?`;
+                });
         }
 
         function esqueciSenha() {
-            div_login_mensagem.innerHTML = `Por enquanto os dados ficam só neste navegador. Crie uma conta nova.`;
+            div_login_mensagem.innerHTML = `Ainda não dá para recuperar a senha por aqui. Crie uma conta nova.`;
         }
     </script>
 </body>
