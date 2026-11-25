@@ -43,33 +43,54 @@ let perguntaAtual = 0;
 let acertos = 0;
 let respostas = [];
 
-function lerTentativas() {
-    let salvas = localStorage.getItem(`sterben_quiz`);
-    if (salvas == null) {
-        return [];
-    }
-    return JSON.parse(salvas);
-}
-
 function telaInicio() {
-    let tentativas = lerTentativas();
-    let recorde = ``;
-    if (tentativas.length > 0) {
-        let melhor = 0;
-        for (let i = 0; i < tentativas.length; i++) {
-            if (tentativas[i].acertos > melhor) {
-                melhor = tentativas[i].acertos;
-            }
-        }
-        recorde = `<p class="texto-cinza">Seu recorde: <strong>${melhor}/${PERGUNTAS.length}</strong> em ${tentativas.length} tentativas.</p>`;
-    }
     div_quiz.innerHTML =
         `<div class="quiz-centro">` +
         `<img src="img/sterben-emblema.svg" alt="" class="quiz-icone">` +
         `<h2>${PERGUNTAS.length} perguntas, sem tempo limite</h2>` +
-        recorde +
+        `<div id="div_recorde"></div>` +
         `<button class="btn btn-grande" onclick="comecar()">Começar</button>` +
         `</div>`;
+    mostrarRecorde();
+}
+
+function mostrarRecorde() {
+    fetch(`/quiz/tentativas/${sessao.idUsuario}`)
+        .then(function (resposta) {
+            return resposta.json();
+        })
+        .then(function (json) {
+            let tentativas = json.tentativas;
+            if (tentativas == null || tentativas.length == 0) {
+                return;
+            }
+            let melhor = 0;
+            for (let i = 0; i < tentativas.length; i++) {
+                if (tentativas[i].acertos > melhor) {
+                    melhor = tentativas[i].acertos;
+                }
+            }
+            div_recorde.innerHTML = `<p class="texto-cinza">Seu recorde: <strong>${melhor}/${PERGUNTAS.length}</strong> em ${tentativas.length} tentativas.</p>`;
+        })
+        .catch(function () {
+            div_recorde.innerHTML = ``;
+        });
+}
+
+function salvarTentativa() {
+    fetch(`/quiz/tentativas`, {
+        method: `POST`,
+        headers: { 'Content-Type': `application/json` },
+        body: JSON.stringify({ idUsuario: sessao.idUsuario, acertos: acertos, total: PERGUNTAS.length, respostas: respostas })
+    })
+        .then(function (resposta) {
+            if (!resposta.ok) {
+                div_aviso_quiz.innerHTML = `Não foi possível salvar esta tentativa.`;
+            }
+        })
+        .catch(function () {
+            div_aviso_quiz.innerHTML = `Não foi possível salvar esta tentativa. O servidor está ligado?`;
+        });
 }
 
 function comecar() {
@@ -141,10 +162,6 @@ function proximaPergunta() {
 }
 
 function telaResultado() {
-    let tentativas = lerTentativas();
-    tentativas.push({ data: new Date().toISOString(), acertos: acertos, total: PERGUNTAS.length, respostas: respostas });
-    localStorage.setItem(`sterben_quiz`, JSON.stringify(tentativas));
-
     let porcentagem = Math.round(acertos / PERGUNTAS.length * 100);
     let mensagem = ``;
     if (porcentagem == 100) {
@@ -178,8 +195,10 @@ function telaResultado() {
         `<h2>${mensagem}</h2>` +
         `<div class="quiz-botoes"><button class="btn btn-grande" onclick="comecar()">Tentar de novo</button>` +
         `<a href="dashboard.html" class="btn-contorno">Ver na dashboard</a></div>` +
+        `<p class="texto-cinza" id="div_aviso_quiz"></p>` +
         `</div>` +
         `<h3 style="margin: 24px 0 8px;">Revisão</h3>${revisao}`;
+    salvarTentativa();
 }
 
 telaInicio();

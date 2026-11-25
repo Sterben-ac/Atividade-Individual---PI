@@ -294,11 +294,26 @@ function montarConta() {
     });
 }
 
+let tentativasQuiz = [];
+
+function carregarQuiz() {
+    fetch(`/quiz/tentativas/${sessao.idUsuario}`)
+        .then(function (resposta) {
+            return resposta.json();
+        })
+        .then(function (json) {
+            if (json.tentativas != null) {
+                tentativasQuiz = json.tentativas;
+            }
+            montarQuiz();
+        })
+        .catch(function () {
+            div_numeros_quiz.innerHTML = `<p class="texto-cinza">Não foi possível carregar o quiz. O servidor está ligado?</p>`;
+        });
+}
+
 function montarQuiz() {
-    let tentativas = JSON.parse(localStorage.getItem(`sterben_quiz`));
-    if (tentativas == null) {
-        tentativas = [];
-    }
+    let tentativas = tentativasQuiz;
 
     if (tentativas.length == 0) {
         div_numeros_quiz.innerHTML =
@@ -323,10 +338,10 @@ function montarQuiz() {
     let ultima = tentativas[tentativas.length - 1];
 
     div_numeros_quiz.innerHTML =
-        cardNumero(tentativas.length, `Tentativas`, `desde ${formatarData(tentativas[0].data)}`, true) +
+        cardNumero(tentativas.length, `Tentativas`, `desde ${formatarData(tentativas[0].dtTentativa)}`, true) +
         cardNumero(`${melhor}/${total}`, `Melhor resultado`, `${Math.round(melhor / total * 100)}% de acerto`) +
         cardNumero((soma / tentativas.length).toLocaleString(`pt-BR`, { maximumFractionDigits: 1 }), `Média de acertos`, `por tentativa`) +
-        cardNumero(`${ultima.acertos}/${total}`, `Última tentativa`, formatarData(ultima.data));
+        cardNumero(`${ultima.acertos}/${total}`, `Última tentativa`, formatarData(ultima.dtTentativa));
 
     criarGrafico(`canvas_grafico_tentativas`, {
         type: `line`,
@@ -407,5 +422,5 @@ function montarTudo() {
 }
 
 montarJornada();
-montarQuiz();
+carregarQuiz();
 carregarConta();
