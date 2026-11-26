@@ -127,18 +127,17 @@ docs/       documentação e diário de prompts
 | `dashboard.html` | Indicadores da jornada, da conta e do quiz (Chart.js) |
 | `quiz.html` / `minigame.html` | Quiz sobre Roblox e o minigame Obby Runner |
 
-> [!NOTE]
-> Por enquanto, o cadastro e o login ficam salvos no navegador (`localStorage`). A próxima etapa é levar os usuários para o MySQL.
+
 
 ## 🟥 Cronograma
 
 | Semana | Entrega | Status |
 |:--:|:--|:--:|
 | 1 | Início do projeto individual | ✅ |
-| 2 | Tema definido, documentação e Git | 🔄 |
-| 3 | Início do site (página Home) | ⏳ |
-| 4 | Cadastro, login e for/vetor | ⏳ |
-| 5 | Dashboard | ⏳ |
+| 2 | Tema definido, documentação e Git | ✅ |
+| 3 | Início do site (página Home) | ✅ |
+| 4 | Cadastro, login e for/vetor | ✅ |
+| 5 | Dashboard | ✅ |
 | 6 | Apresentação | ⏳ |
 
 ## 🟥 Uso de Inteligência Artificial
