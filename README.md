@@ -34,17 +34,15 @@ O **Minha Jornada no Roblox** é um website que, a partir do ID de um jogador, b
 
 Jogo Roblox desde **2017**. O jogo foi uma das partes mais aguardadas do meu dia, um lugar onde fiz amizades on-line e onde aprendi muito mais do que parece: o inglês, conversando com jogadores de outros países, além da criatividade e do raciocínio lógico. Escolhi o tema por representar uma parte importante da minha história.
 
-## 🟥 Funcionalidades planejadas
+## 🟥 Funcionalidades
 
-- [ ] 🏠 Página inicial apresentando o projeto
-- [ ] 🔐 Cadastro e login, com validação dos formulários em JavaScript
-- [ ] 🆔 Vínculo do usuário a um ID do Roblox
-- [ ] 🏅 Consulta de dados públicos do jogador (emblemas e jogos)
-- [ ] 🕹️ Linha do tempo da trajetória na plataforma
-- [ ] 📊 Dashboard com indicadores (emblemas por ano, jogos com mais conquistas, primeiro jogo registrado)
-
-> [!NOTE]
-> O uso de dados externos do Roblox depende da aprovação do professor e das configurações de privacidade de cada conta. Caso não seja possível, os dados serão cadastrados manualmente no site.
+- [x] 🏠 Página inicial apresentando o projeto
+- [x] 🔐 Cadastro e login, com validação dos formulários em JavaScript e usuários salvos no MySQL
+- [x] 🆔 Vínculo do usuário a um ID do Roblox
+- [x] 🏅 Consulta de dados públicos do jogador (emblemas e jogos)
+- [x] 🕹️ Linha do tempo da trajetória na plataforma
+- [x] ❓ Quiz sobre o Roblox, com as tentativas salvas no banco
+- [x] 📊 Dashboard com indicadores (emblemas por ano, jogos com mais conquistas, primeiro jogo registrado e desempenho no quiz)
 
 ## 🟥 Tecnologias
 
@@ -72,21 +70,6 @@ Jogo Roblox desde **2017**. O jogo foi uma das partes mais aguardadas do meu dia
 
 </details>
 
-## 🟥 Como executar
-
-Precisa do [Node.js](https://nodejs.org/) instalado (versão 18 ou mais nova). Na pasta `api`:
-
-```bash
-cd api
-npm install     # só na primeira vez (baixa o Express e o dotenv)
-npm start
-```
-
-Depois abra **http://localhost:3000** no navegador.
-
-> [!TIP]
-> Também dá para abrir o `site/index.html` com dois cliques. Nesse caso o site funciona com **dados de exemplo**, porque sem o servidor não é possível buscar os dados do Roblox.
-
 ### Chave da API do Roblox (para emblemas e inventário)
 
 Desde março de 2026, o Roblox só entrega a lista de emblemas e o inventário de um jogador para quem usa a API oficial (**Open Cloud**) com uma chave. Sem a chave, essas partes mostram dados de exemplo.
@@ -96,6 +79,7 @@ Desde março de 2026, o Roblox só entrega a lista de emblemas e o inventário d
 3. Em **Accepted IP Addresses**, coloque o IP do seu computador (ou `0.0.0.0/0` para aceitar qualquer um, só durante os testes).
 4. Salve e copie a chave. Na pasta `api`, copie o arquivo `.env.exemplo` com o nome `.env` e cole a chave na linha `ROBLOX_API_KEY=`.
 5. Reinicie o servidor (`Ctrl + C` e `npm start` de novo).
+(Não coloquei diretamente a api no repositório por questões de segurança pessoal, já que ela é adquirida registrada pela sua conta se usuário)
 
 > [!WARNING]
 > A chave é secreta, como uma senha. O arquivo `.env` está no `.gitignore` para nunca ir para o GitHub.
@@ -106,8 +90,10 @@ Desde março de 2026, o Roblox só entrega a lista de emblemas e o inventário d
 ### Estrutura
 
 ```
-api/        servidor Node.js com Express: app.js liga o servidor; src/routes, src/controllers
-            e src/models fazem a ponte com a API do Roblox (como no Web Data Viz)
+api/        servidor Node.js com Express (como no Web Data Viz): app.js liga o servidor;
+            src/routes, src/controllers e src/models cuidam de usuários, quiz e Roblox;
+            src/database/config.js faz a conexão com o MySQL
+banco/      script.sql com as tabelas e as perguntas do quiz
 site/       páginas (HTML), estilos (css/), scripts (js/) e imagens (img/)
 docs/       documentação e diário de prompts
 ```
@@ -142,7 +128,7 @@ docs/       documentação e diário de prompts
 
 ## 🟥 Uso de Inteligência Artificial
 
-Assistentes de IA foram usados como apoio para tirar dúvidas, organizar ideias e revisar textos. Todo o uso está registrado no 📓 [Diário de Prompts](docs/diario-de-prompts.md).
+Assistentes de IA foram usados como apoio para tirar dúvidas, organizar ideias e revisar textos. Registrado no 📓 [Diário de Prompts](docs/diario-de-prompts.md) o que é de relevância significativa.
 
 ---
 
